@@ -1,0 +1,34 @@
+<div style="border-style: dotted">
+    <h4>All Products:</h4>
+    <table>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Is Available</th>
+      <th>Producer</th>
+      <th>Ingredients</th>
+      <th></th>
+  
+      <tr *ngFor='let product of products'>
+        <td>{{product.name}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.isAvailable}}</td>
+        <td [ngSwitch]="product.producer">          
+                <span *ngSwitchCase =1>USA</span>
+                <span *ngSwitchCase =2>UK</span>
+                <span *ngSwitchCase =3>Ukraine</span>
+        </td>
+        <td>
+          <ul>
+            <li *ngFor='let ingredient of product.ingredients'>
+              {{ingredient}}
+            </li>
+          </ul>
+        </td>
+        <td>
+            <button (click)="onBuy(product);">Buy</button>
+        </td>
+      <tr>     
+    </table>
+</div>

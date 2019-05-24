@@ -1,0 +1,26 @@
+<div style="border-style: dotted">
+    <h4>Cart:</h4>
+    <table *ngIf='cartItems.length > 0; else cartEmpty'>
+      <th>Name</th>
+      <th>Count</th>
+      <th>Price</th>
+      <th></th>
+      
+      <tr *ngFor='let cartItem of cartItems'>
+        <td>{{cartItem.product.name}}</td>        
+        <td>
+          <input type="number" [(ngModel)]='cartItem.count'/>           
+        </td>
+        <td>{{cartItem.product.price * cartItem.count}}</td>
+        <td>
+          <button (click)='onRemoveFromCart(cartItem)'>Remove from cart</button>
+        </td>
+      <tr>
+    </table>
+
+    <ng-template #cartEmpty>
+        <div >
+            Cart is empty.
+          </div>
+    </ng-template>    
+</div>
