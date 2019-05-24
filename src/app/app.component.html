@@ -2,10 +2,7 @@
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
-  </h1>  
-  <app-product (createProduct)="onCreateProduct($event)"></app-product>
-  <app-product-list [products]="products" (buy)="onBuy($event)"></app-product-list>
-  <app-cart [cartItems]="cartItems" (deleteFromCart)="onDeleteFromCart($event)"></app-cart>
+  </h1>
 </div>
 
 <router-outlet></router-outlet>
