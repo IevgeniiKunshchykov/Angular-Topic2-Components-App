@@ -1,0 +1,20 @@
+<div align="left" style="padding: 10px; margin: 5px; border: 4px solid steelblue; ">
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td>{{cartItem.product.name}}</td>
+    </tr>
+    <tr>
+      <td>Count:</td>
+      <td><input type="number" 
+        [(ngModel)]='cartItem.count' 
+        (wheel)="countWheelTurned($event);"
+        (blur)="validateCount();"/></td>
+    </tr>
+    <tr >
+      <td>Price:</td>
+      <td>{{cartItem.product.price * cartItem.count}}</td>
+    </tr> 
+  </table>    
+  <button align="right" (click)="removeFromCart();">Remove</button>
+</div>

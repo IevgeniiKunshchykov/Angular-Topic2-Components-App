@@ -1,0 +1,43 @@
+<div align="left" style="padding: 10px; margin: 5px; border: 4px solid steelblue; ">
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td>{{product.name}}</td>
+    </tr>
+    <tr>
+      <td>Description:</td>
+      <td>{{product.description}}</td>
+    </tr>
+    <tr >
+      <td>Price:</td>
+      <td>{{product.price}}</td>
+    </tr>
+    <tr>
+      <td>Is Available:</td>
+      <td><input type="checkbox" disabled="true" [(ngModel)]="product.isAvailable"/></td>
+    </tr>
+    <tr>
+      <td>Producer:</td>
+      <td>
+        <span [ngSwitch]="product.producer">
+          <span *ngSwitchCase =1>USA</span>
+          <span *ngSwitchCase =2>UK</span>
+          <span *ngSwitchCase =3>Ukraine</span>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>Ingredients:</td>
+      <td>
+          <ul>
+              <li *ngFor='let ingredient of product.ingredients'>
+                {{ingredient}}
+              </li>
+          </ul>
+      </td>
+    </tr>
+  </table>
+  <div align="right">
+    <button (click)="addToCart(product);" [disabled]="!product.isAvailable">Add to cart</button>
+  </div>
+</div>
