@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ProductService } from './products/services/product.service';
 import { CartService } from './cart/services/cart.service';
 import { Observable } from 'rxjs';
@@ -10,9 +10,9 @@ import { CartItem } from './cart/models/cart-item';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
-  title = 'shop';
+  @ViewChild('appTitle') apptitle: ElementRef;
 
   products: Observable<Array<IProduct>>;
 
@@ -21,5 +21,9 @@ export class AppComponent implements OnInit {
   
   ngOnInit() {
     this.products = this.productService.getProducts();
-  }  
+  } 
+  
+  ngAfterViewInit(): void {
+    this.apptitle.nativeElement.innerText = 'Shop';
+  }
 }
