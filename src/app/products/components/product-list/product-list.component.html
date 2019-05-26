@@ -2,7 +2,7 @@
     <h4>All Products:</h4>
     <ul>
       <li *ngFor='let product of products | async'>
-        <app-product [product]="product" (addToCartEvent)="addToCart($event)"></app-product> 
+        <app-product [mouseHoverStyle]="green" [product]="product" (addToCartEvent)="addToCart($event)"></app-product> 
       <li>     
     </ul>
 </div>
