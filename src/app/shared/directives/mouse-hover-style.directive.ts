@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, Component } from '@angular/core';
 
 @Directive({
   selector: '[appMouseHoverStyle]'
@@ -7,13 +7,11 @@ export class MouseHoverStyleDirective {
 
   @Input('appMouseHoverStyle') highlightColor: string;
 
-  constructor(private el: ElementRef) {    
-    console.log("qwe123")
+  constructor(private el: ElementRef) {   
   }
 
-  @HostListener('mouseenter') onMouseEnter() {
-    console.log("qwe")
-    this.highlight(this.highlightColor || 'yellow');
+  @HostListener('mouseenter') onMouseEnter() {    
+    this.highlight(this.highlightColor);
   }
 
   @HostListener('mouseleave') onMouseLeave() {
@@ -21,6 +19,7 @@ export class MouseHoverStyleDirective {
   }
 
   private highlight(color: string) {
+    console.log(color)
     this.el.nativeElement.style.backgroundColor = color;
   }
 }

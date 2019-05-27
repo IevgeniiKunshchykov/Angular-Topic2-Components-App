@@ -32,6 +32,6 @@ export class CartListComponent implements OnInit, DoCheck {
   }
 
   removeCartItem(cartItem: CartItem){
-
+    this.cartService.removeProductFromCart(cartItem);
   }
 }

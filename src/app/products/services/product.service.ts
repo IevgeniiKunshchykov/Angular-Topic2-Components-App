@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { IProduct } from '../interfaces/iproduct';
 import { Product } from '../models/product';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
 export class ProductService {
 
   private products: Array<IProduct> = [];
+
+  private products$: Observable<IProduct[]> = of(this.products);
 
   constructor() {
     const product1 = new Product();
@@ -37,10 +39,7 @@ export class ProductService {
   }
 
   getProducts(): Observable<Array<IProduct>> {
-    return Observable.create((observer)=>
-    { 
-      observer.next(this.products); 
-    });;
+    return this.products$;
   }
 
   createProduct(product: IProduct): void {

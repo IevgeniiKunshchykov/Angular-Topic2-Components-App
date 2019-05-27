@@ -1,27 +1,16 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { ProductService } from './products/services/product.service';
-import { CartService } from './cart/services/cart.service';
-import { Observable } from 'rxjs';
-import { IProduct } from './products/interfaces/iproduct';
-import { CartItem } from './cart/models/cart-item';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements AfterViewInit {
 
   @ViewChild('appTitle') apptitle: ElementRef;
 
-  products: Observable<Array<IProduct>>;
-
-  constructor(private productService: ProductService) {
+  constructor() {
   }
-  
-  ngOnInit() {
-    this.products = this.productService.getProducts();
-  } 
   
   ngAfterViewInit(): void {
     this.apptitle.nativeElement.innerText = 'Shop';

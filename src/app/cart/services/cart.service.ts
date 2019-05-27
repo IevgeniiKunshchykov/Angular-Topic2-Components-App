@@ -1,28 +1,23 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../models/cart-item';
 import { IProduct } from 'src/app/products/interfaces/iproduct';
-import { Observable, Subject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   
-  private cartItemsSubjct: Subject<CartItem[]> = new Subject<CartItem[]>();
   private cartItems: Array<CartItem> = [];
 
-  cartItems$ = this.cartItemsSubjct.asObservable();
+  private cartItems$: Observable<CartItem[]> = of(this.cartItems);
 
   constructor() { 
-    this.cartItemsSubjct.next(this.cartItems);
+    
   }
 
   getCartItems(): Observable<Array<CartItem>> {
-    var observable =  Observable.create(observer=>{
-        observer.next(this.cartItems);
-    });
-    
-    return observable;
+    return this.cartItems$;
   }
 
   addProductToCart(product: IProduct): void {

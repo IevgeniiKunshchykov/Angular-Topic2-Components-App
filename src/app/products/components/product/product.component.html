@@ -1,4 +1,7 @@
-<div align="left" style="padding: 10px; margin: 5px; border: 4px solid steelblue; ">
+<div align="left" [ngClass]="{
+  avaliableProduct: product.isAvailable,
+  notAvaliableProduct: !product.isAvailable
+}" class="productItem">
   <table>
     <tr>
       <td>Name:</td>

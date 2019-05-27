@@ -1,0 +1,13 @@
+.productItem{
+    padding: 10px;
+    margin: 5px;
+    border: 4px solid steelblue;
+}
+
+.notAvaliableProduct{
+    background: lightgrey
+}
+
+.avaliableProduct{
+    background: transparent
+}
