@@ -1,0 +1,24 @@
+<div style="margin: 5px; padding: 10px; border: 4px solid blueviolet;">
+    <h4>Orders:</h4>
+    <div *ngIf="orders.length > 0; else ordersEmpty">
+      <ul>
+          <li *ngFor="let order of orders">
+            <div style="margin: 5px; border: 4px solid blue;">
+               <h1>Order:</h1>
+               <li *ngFor="let orderItem of order.orderItems">
+                  <div>Product Name: {{orderItem.name}}</div>
+                  <div>Count: {{orderItem.count}}</div>
+                  <div>Price: {{orderItem.price}}</div>
+                <li>     
+            </div>
+          <li>     
+      </ul>
+      <div>Total count:{{totalCount}}</div>
+      <div>Total price:{{totalPrice}}</div>      
+    </div>
+    <ng-template #ordersEmpty>
+        <div >
+          No Orders.
+        </div>
+    </ng-template>    
+</div>

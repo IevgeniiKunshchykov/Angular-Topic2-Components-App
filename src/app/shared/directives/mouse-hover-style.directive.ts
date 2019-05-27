@@ -19,7 +19,6 @@ export class MouseHoverStyleDirective {
   }
 
   private highlight(color: string) {
-    console.log(color)
     this.el.nativeElement.style.backgroundColor = color;
   }
 }
