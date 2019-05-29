@@ -4,7 +4,7 @@ import { Injectable, Version } from '@angular/core';
 export class ConstantsService {
 
   app: string;
-  version: Version
+  version: Version;
 
   constructor() { }
 }

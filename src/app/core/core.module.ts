@@ -9,16 +9,16 @@ import { GeneratorServiceFactory } from './services/generator.factory';
 
 @NgModule({
   declarations: [],
-  providers:[
+  providers: [
     CartService,
-    ProductService, 
+    ProductService,
     OrdersService,
     {
       provide: ConstantsService,
-      useValue:{
-        app:"TestApp",
-        version:{
-          full:"1.0.0"
+      useValue: {
+        app: 'TestApp',
+        version: {
+          full: '1.0.0'
         }
       }
     },

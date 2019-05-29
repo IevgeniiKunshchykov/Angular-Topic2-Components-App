@@ -10,10 +10,10 @@ export class AppComponent implements AfterViewInit {
 
   @ViewChild('appTitle') apptitle: ElementRef;
 
-  constructor(private g:GeneratorService) { 
+  constructor(private g: GeneratorService) {
     console.log(g.generateSequesnce());
   }
-  
+
   ngAfterViewInit(): void {
     this.apptitle.nativeElement.innerText = 'Shop';
   }

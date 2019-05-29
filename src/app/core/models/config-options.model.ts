@@ -8,18 +8,13 @@ export class ConfigOptions implements IConfigOptions {
     public connectionString?: string;
     public encryptionKey?: string;
 
-    constructor(id: number, 
-            login: string, 
-            email?: string, 
-            mode?: string, 
-            connectionString?: string, 
-            encryptionKey?: string
-        ) {
-            this.id = id;
-            this.login = login;
-            this.email = email;
-            this.mode = mode || "Dev";
-            this.connectionString = connectionString || "TestConnectionString";
-            this.encryptionKey = encryptionKey;
+    constructor(id: number, login: string, email?: string, mode?: string, connectionString?: string, encryptionKey?: string
+    ) {
+        this.id = id;
+        this.login = login;
+        this.email = email;
+        this.mode = mode || 'Dev';
+        this.connectionString = connectionString || 'TestConnectionString';
+        this.encryptionKey = encryptionKey;
     }
 }
