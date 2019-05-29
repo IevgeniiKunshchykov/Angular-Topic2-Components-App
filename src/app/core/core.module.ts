@@ -6,7 +6,8 @@ import { OrdersService } from '../orders/services/orders.service';
 
 @NgModule({
   declarations: [],
-  providers:[CartService, ProductService, OrdersService],
+  // Все сервисы уже зарегистрированы чеез декоратор Injectable
+  // providers:[CartService, ProductService, OrdersService],
   imports: [
     CommonModule
   ]
