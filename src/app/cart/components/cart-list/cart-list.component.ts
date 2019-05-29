@@ -12,32 +12,35 @@ import { IOrderItem } from 'src/app/orders/interfaces/iorderitem';
   styleUrls: ['./cart-list.component.css']
 })
 export class CartListComponent implements OnInit, OnDestroy, DoCheck {
- 
+
   cartItems: Array<CartItem> = [];
 
   totalPrice: number = 0;
   totalCount: number = 0;
 
-  private sub1: Subscription;
-  private sub2: Subscription;
-  private sub3: Subscription;
+  private sub: Subscription;
+  // private sub1: Subscription;
+  // private sub2: Subscription;
+  // private sub3: Subscription;
 
   constructor(private cartService: CartService,
     private orderService: OrdersService) { }
 
   ngOnInit(): void {
-    this.sub1 = this.cartService.getCartItems()
+    // основная подписка
+    this.sub = this.cartService.getCartItems()
       .subscribe(x=> {
         this.cartItems = x;
       });
 
-    this.sub2 =this.cartService.getTotalCount().subscribe(x=>{
+      // дочерние
+    this.sub.add(this.cartService.getTotalCount().subscribe(x=>{
       this.totalCount = x;
-    });
+    }));
 
-    this.sub3 = this.cartService.getTotalPrice().subscribe(x=>{
+    this.sub.add(this.cartService.getTotalPrice().subscribe(x=>{
       this.totalPrice = x;
-    });
+    }));
   }
 
   buy(){
@@ -46,7 +49,7 @@ export class CartListComponent implements OnInit, OnDestroy, DoCheck {
       orderItems: []
     };
 
-    for(let cartItem of this.cartItems){      
+    for(let cartItem of this.cartItems){
       var orderItem: IOrderItem = {
         name : cartItem.product.name,
         count : cartItem.count,
@@ -70,8 +73,9 @@ export class CartListComponent implements OnInit, OnDestroy, DoCheck {
   }
 
   ngOnDestroy(): void {
-    this.sub1.unsubscribe();
-    this.sub2.unsubscribe();
-    this.sub3.unsubscribe();
+    // отписка от основной и дочерних
+    this.sub.unsubscribe();
+    // this.sub2.unsubscribe();
+    // this.sub3.unsubscribe();
   }
 }
