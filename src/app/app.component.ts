@@ -1,4 +1,5 @@
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { GeneratorService } from './core/services/generator.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,10 @@ export class AppComponent implements AfterViewInit {
 
   @ViewChild('appTitle') apptitle: ElementRef;
 
-  constructor() {
+  constructor(private g:GeneratorService) { 
+    console.log(g.generateSequesnce());
   }
-
+  
   ngAfterViewInit(): void {
     this.apptitle.nativeElement.innerText = 'Shop';
   }

@@ -73,5 +73,7 @@ export class CartService {
 
   clearCart() {
     this.cartItems.splice(0, this.cartItems.length);
+    this.refreshTotalCount();
+    this.refreshTotalPrice();
   }
 }
