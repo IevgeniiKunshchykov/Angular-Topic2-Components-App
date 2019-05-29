@@ -14,13 +14,13 @@ import { SharedModule } from './shared/shared.module';
   declarations: [
     AppComponent
   ],
-  imports: [BrowserModule, 
-    AppRoutingModule, 
+  imports: [BrowserModule,
+    AppRoutingModule,
     FormsModule,
-    CartModule, 
-    ProductsModule, 
-    OrdersModule, 
-    CoreModule, 
+    CartModule,
+    ProductsModule,
+    OrdersModule,
+    CoreModule,
     SharedModule
   ],
   bootstrap: [AppComponent]

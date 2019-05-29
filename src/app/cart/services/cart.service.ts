@@ -8,17 +8,15 @@ import { Observable, of, Subject } from 'rxjs';
 })
 export class CartService {
 
-  private cartItems: Array<CartItem> = [];  
+  private cartItems: Array<CartItem> = [];
   private totalCount: Subject<number> = new Subject<number>();
   private totalPrice: Subject<number> = new Subject<number>();
   private cartItemsSubject: Subject<CartItem[]> = new Subject<CartItem[]>();
-    
   private cartItems$: Observable<CartItem[]> = this.cartItemsSubject.asObservable();
   private totalCount$: Observable<number> = this.totalCount.asObservable();
-  private totalPrice$: Observable<number> = this.totalPrice.asObservable(); 
+  private totalPrice$: Observable<number> = this.totalPrice.asObservable();
 
-  constructor() { 
-    
+  constructor() {
   }
 
   getCartItems(): Observable<Array<CartItem>> {
@@ -26,7 +24,7 @@ export class CartService {
   }
 
   addProductToCart(product: IProduct): void {
-    
+
     const cartItem = new CartItem();
     cartItem.count = 1;
     cartItem.product = product;
@@ -47,26 +45,26 @@ export class CartService {
     this.refreshTotalPrice();
   }
 
-  getTotalCount(): Observable<number>{
+  getTotalCount(): Observable<number> {
     return this.totalCount$;
   }
-  
-  getTotalPrice(): Observable<number>{
+
+  getTotalPrice(): Observable<number> {
     return this.totalPrice$;
   }
 
-  refreshTotalCount(){    
-    var count = 0;
-    for(let cartItem of this.cartItems){      
+  refreshTotalCount() {
+    let count = 0;
+    for (const cartItem of this.cartItems) {
       count += cartItem.count;
     }
 
     this.totalCount.next(count);
   }
 
-  refreshTotalPrice(){    
-    var price = 0;
-    for(let cartItem of this.cartItems){      
+  refreshTotalPrice() {
+    let price = 0;
+    for (const cartItem of this.cartItems) {
       price += cartItem.count * cartItem.product.price;
     }
 

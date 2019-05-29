@@ -7,10 +7,10 @@ export class MouseHoverStyleDirective {
 
   @Input('appMouseHoverStyle') highlightColor: string;
 
-  constructor(private el: ElementRef) {   
+  constructor(private el: ElementRef) {
   }
 
-  @HostListener('mouseenter') onMouseEnter() {    
+  @HostListener('mouseenter') onMouseEnter() {
     this.highlight(this.highlightColor);
   }
 

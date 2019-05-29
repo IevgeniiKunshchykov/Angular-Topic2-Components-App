@@ -35,7 +35,7 @@ export class ProductService {
     product3.producer = 2;
     product3.ingredients = ['Milk'];
 
-    this.products.push(product1, product2, product3);    
+    this.products.push(product1, product2, product3);
   }
 
   getProducts(): Observable<Array<IProduct>> {

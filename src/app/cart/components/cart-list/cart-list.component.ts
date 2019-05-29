@@ -15,42 +15,37 @@ export class CartListComponent implements OnInit, OnDestroy, DoCheck {
 
   cartItems: Array<CartItem> = [];
 
-  totalPrice: number = 0;
-  totalCount: number = 0;
+  totalPrice: number;
+  totalCount: number;
 
   private sub: Subscription;
-  // private sub1: Subscription;
-  // private sub2: Subscription;
-  // private sub3: Subscription;
 
-  constructor(private cartService: CartService,
-    private orderService: OrdersService) { }
+  constructor(private cartService: CartService, private orderService: OrdersService) { }
 
   ngOnInit(): void {
     // основная подписка
-    this.sub = this.cartService.getCartItems()
-      .subscribe(x=> {
+    this.sub = this.cartService.getCartItems().subscribe( x => {
         this.cartItems = x;
       });
 
       // дочерние
-    this.sub.add(this.cartService.getTotalCount().subscribe(x=>{
+    this.sub.add(this.cartService.getTotalCount().subscribe( x => {
       this.totalCount = x;
     }));
 
-    this.sub.add(this.cartService.getTotalPrice().subscribe(x=>{
+    this.sub.add(this.cartService.getTotalPrice().subscribe( x => {
       this.totalPrice = x;
     }));
   }
 
-  buy(){
+  buy() {
 
-    var order: IOrder = {
+    const order: IOrder = {
       orderItems: []
     };
 
-    for(let cartItem of this.cartItems){
-      var orderItem: IOrderItem = {
+    for (const cartItem of this.cartItems) {
+      const orderItem: IOrderItem = {
         name : cartItem.product.name,
         count : cartItem.count,
         price : cartItem.product.price * cartItem.count
@@ -68,14 +63,12 @@ export class CartListComponent implements OnInit, OnDestroy, DoCheck {
     this.cartService.refreshTotalPrice();
   }
 
-  removeCartItem(cartItem: CartItem){
+  removeCartItem(cartItem: CartItem) {
     this.cartService.removeProductFromCart(cartItem);
   }
 
   ngOnDestroy(): void {
     // отписка от основной и дочерних
     this.sub.unsubscribe();
-    // this.sub2.unsubscribe();
-    // this.sub3.unsubscribe();
   }
 }

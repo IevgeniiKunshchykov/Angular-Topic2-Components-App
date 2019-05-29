@@ -16,27 +16,24 @@ export class CartItemComponent implements OnInit {
   ngOnInit() {
   }
 
-  countWheelTurned(event: WheelEvent){
+  countWheelTurned(event: WheelEvent) {
     console.log(event);
-    if(event.deltaY < 0)
-    {
+    if (event.deltaY < 0) {
       this.cartItem.count += 1;
     }
-    
-    if(event.deltaY > 0)
-    {
+
+    if (event.deltaY > 0) {
       this.cartItem.count -= 1;
     }
   }
 
-  validateCount(){
-    if(this.cartItem.count < 1)
-    {
+  validateCount() {
+    if (this.cartItem.count < 1) {
       this.cartItem.count = 1;
     }
   }
 
-  removeFromCart(){
+  removeFromCart() {
     this.removeCartItem.emit(this.cartItem);
   }
 }

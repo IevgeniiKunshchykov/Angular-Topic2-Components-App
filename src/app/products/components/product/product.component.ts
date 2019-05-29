@@ -8,7 +8,7 @@ import { IProduct } from '../../interfaces/iproduct';
 })
 export class ProductComponent implements OnInit {
 
-  @Input() product: IProduct
+  @Input() product: IProduct;
 
   @Output() addToCartEvent: EventEmitter<IProduct> = new EventEmitter<IProduct>();
 

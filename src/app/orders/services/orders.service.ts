@@ -6,14 +6,14 @@ import { Subject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OrdersService {
- 
-  private orders: Array<IOrder> = [];  
-  private ordersSubject: Subject<IOrder[]> = new Subject<IOrder[]>();    
+
+  private orders: Array<IOrder> = [];
+  private ordersSubject: Subject<IOrder[]> = new Subject<IOrder[]>();
   private orders$: Observable<IOrder[]> = this.ordersSubject.asObservable();
 
   constructor() { }
 
-  getOrders():Observable<IOrder[]>{
+  getOrders(): Observable<IOrder[]> {
     return this.orders$;
   }
 
