@@ -11,7 +11,7 @@ export class GeneratorService {
 
   generateSequesnce(): string {
 
-    let sequence: string;
+    let sequence = '';
 
     for (let index = 0; index < this.sequenceLeght; index++) {
 
@@ -40,5 +40,5 @@ export class GeneratorService {
 
   private randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
- }
+  }
 }

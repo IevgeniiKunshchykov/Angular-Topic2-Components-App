@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CartItem } from '../models/cart-item';
 import { IProduct } from 'src/app/products/interfaces/iproduct';
 import { Observable, of, Subject } from 'rxjs';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,8 @@ export class CartService {
   private totalCount$: Observable<number> = this.totalCount.asObservable();
   private totalPrice$: Observable<number> = this.totalPrice.asObservable();
 
+  private counter: 0;
+
   constructor() {
   }
 
@@ -25,7 +28,10 @@ export class CartService {
 
   addProductToCart(product: IProduct): void {
 
+    this.counter++;
+
     const cartItem = new CartItem();
+    cartItem.id = this.counter;
     cartItem.count = 1;
     cartItem.product = product;
 
@@ -39,10 +45,27 @@ export class CartService {
   removeProductFromCart(cartItem: CartItem): void {
     const index = this.cartItems.indexOf(cartItem, 0);
     this.cartItems.splice(index, 1);
+    this.counter--;
 
     this.cartItemsSubject.next(this.cartItems);
     this.refreshTotalCount();
     this.refreshTotalPrice();
+  }
+
+  increaseCount(id: number) {
+    for (const cartItem of this.cartItems) {
+      if (cartItem.id === id) {
+        cartItem.count++;
+      }
+    }
+  }
+
+  decreaseCount(id: number) {
+    for (const cartItem of this.cartItems) {
+      if (cartItem.id === id) {
+        cartItem.count--;
+      }
+    }
   }
 
   getTotalCount(): Observable<number> {
@@ -72,6 +95,7 @@ export class CartService {
   }
 
   clearCart() {
+    this.counter = 0;
     this.cartItems.splice(0, this.cartItems.length);
     this.refreshTotalCount();
     this.refreshTotalPrice();

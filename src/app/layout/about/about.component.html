@@ -1,0 +1,84 @@
+<div style="margin: 20px">
+  <h1>
+    Services demonstration!
+  </h1>
+
+  <div [appChangeStyle]="'30px'" *ngIf="localStorageService"
+    style="border-style: solid; border-color: coral; border-width: 2px; padding: 5px; margin: 5px">
+    <h3>Local storage service</h3>
+    <div>
+      <input type="text" #item>
+      <button (click)="localStorageService.setItem(item.value); item.value = '';">Add item</button>
+    </div>
+    <br>
+    <h4>Items:</h4>
+    <ul *ngFor="let item of localStorageService.getItem() | async">
+      <li>
+        {{item}} <button style="margin: 10 0 0 0" (click)="localStorageService.removeItem(item);">Remove item</button>
+      </li>
+    </ul>
+  </div>
+
+  <div [appChangeStyle]="'30px'"
+    style="border-style: solid; border-color: coral; border-width: 2px; padding: 5px; margin: 5px">
+    <h4>Generator service</h4>
+    <div>Generated Sequence: {{generatedSequence}}</div>
+  </div>
+
+  <div [appChangeStyle]="'25px'"
+    style="border-style: solid; border-color: coral; border-width: 2px; padding: 5px; margin: 5px">
+    <h4>Constants service</h4>
+    <div>App: {{constantsService.app}}</div>
+    <div>Version: {{constantsService.version.full}}</div>
+  </div>
+
+  <div [appChangeStyle]="'20px'"
+    style="border-style: solid; border-color: coral; border-width: 2px; padding: 5px; margin: 5px">
+    <h4>Config Options service</h4>
+    <form (ngSubmit)="createConfigOption();" id="ConfigOption-form" #form="ngForm">
+      <div class="form-group">
+        <label for="id">ID: </label>
+        <input type="number" required min="1" type="number" class="form-control" id="id" name="id" placeholder="Id"
+          [(ngModel)]="configOption.id">
+      </div>
+      <div class="form-group">
+        <label for="login">Login: </label>
+        <input type="text" required class="form-control" id="login" name="login" placeholder="Login" required
+          [(ngModel)]="configOption.login">
+      </div>
+      <div class="form-group">
+        <label for="email">Email: </label>
+        <input type="text" class="form-control" id="email" name="email" placeholder="Email" required
+          [(ngModel)]="configOption.email">
+      </div>
+      <div class="form-group">
+        <label for="mode">Mode: </label>
+        <input type="text" class="form-control" id="mode" name="mode" placeholder="Mode" required
+          [(ngModel)]="configOption.mode">
+      </div>
+      <div class="form-group">
+        <label for="connectionString">Connection String: </label>
+        <input type="text" class="form-control" id="connectionString" name="connectionString"
+          placeholder="ConnectionString" required [(ngModel)]="configOption.connectionString">
+      </div>
+      <div class="form-group">
+        <label for="encryptionKey">Encryption Key: </label>
+        <input type="text" class="form-control" id="encryptionKey" name="encryptionKey" placeholder="encryption Key"
+          required [(ngModel)]="configOption.encryptionKey">
+      </div>
+      <button type="submit" form="ConfigOption-form">Set config options</button>
+    </form>
+
+    <p>Current config options:</p>
+    <div *ngIf="(this.configOptionsService.getConfigOptions() | async) as co">
+      <div>Id: {{co.id}}</div>
+      <div>Login: {{co.login}}</div>
+      <div>Email: {{co.email}}</div>
+      <div>Mode: {{co.mode}}</div>
+      <div>Connection String: {{co.connectionString}}</div>
+      <div>Encryption Key: {{co.encryptionKey}}</div>
+    </div>
+
+  </div>
+
+</div>
