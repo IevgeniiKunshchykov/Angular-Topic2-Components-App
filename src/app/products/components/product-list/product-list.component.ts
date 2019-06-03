@@ -12,7 +12,9 @@ import { ProductService } from '../../services/product.service';
 })
 export class ProductListComponent implements OnInit {
 
-  products$: Observable<Array<IProduct>>;
+  sortField = 'price';
+  sortOrder = true;
+  products$: Promise<Array<IProduct>>;
 
   constructor(private productService: ProductService, private cartService: CartService) {
   }
@@ -25,4 +27,3 @@ export class ProductListComponent implements OnInit {
     this.cartService.addProductToCart(product);
   }
 }
-

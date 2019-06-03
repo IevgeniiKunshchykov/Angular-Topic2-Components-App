@@ -11,13 +11,16 @@ export class ProductService {
 
   private products: Array<IProduct> = [];
 
-  private products$: Observable<IProduct[]> = of(this.products);
-
+  private products$: Promise<IProduct[]> = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(this.products);
+    }, 1000);
+  });
   constructor() {
     const product1 = new Product();
     product1.name = 'Bread';
     product1.isAvailable = false;
-    product1.price = 2;
+    product1.price = 5;
     product1.producer = 3;
     product1.ingredients = ['Egg', 'Dough'];
 
@@ -38,7 +41,7 @@ export class ProductService {
     this.products.push(product1, product2, product3);
   }
 
-  getProducts(): Observable<Array<IProduct>> {
+  getProducts(): Promise<Array<IProduct>> {
     return this.products$;
   }
 

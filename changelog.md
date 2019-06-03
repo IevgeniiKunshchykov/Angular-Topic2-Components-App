@@ -24,3 +24,10 @@
 5. Create GeneratorService. Create factory GeneratorServiceFactory to generate service.  Register it with useFactory.
 6. Add AboutComponent and use all services above.
 7. Add ChangeStyleDirective which changes font size inside each orange block inside AboutComponent.
+
+## Actions - pipes
+1. Use uppercase pipe in ProductComponent for name
+2. Use currency pipe in ProductComponent for price
+3. Use lowercase pipe in ProductComponent for ingredient
+4. Change productservice to return promise when getting all products. Use async pipe to display products
+5. Add OrderByPipe, register it in shared module. Use it in product list component to sort by name or price, asc or desc.

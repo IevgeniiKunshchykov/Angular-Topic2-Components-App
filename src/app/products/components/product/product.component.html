@@ -5,7 +5,7 @@
   <table>
     <tr>
       <td>Name:</td>
-      <td>{{product.name}}</td>
+      <td>{{product.name | uppercase}}</td>
     </tr>
     <tr>
       <td>Description:</td>
@@ -13,7 +13,7 @@
     </tr>
     <tr >
       <td>Price:</td>
-      <td>{{product.price}}</td>
+      <td>{{product.price | currency:'USD'}}</td>
     </tr>
     <tr>
       <td>Is Available:</td>
@@ -34,7 +34,7 @@
       <td>
           <ul>
               <li *ngFor='let ingredient of product.ingredients'>
-                {{ingredient}}
+                {{ingredient | lowercase}}
               </li>
           </ul>
       </td>

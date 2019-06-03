@@ -1,8 +1,20 @@
 <div class="productlist">
     <h4>All Products:</h4>
     <ul>
+      <div>Sort field:
+        <select [(ngModel)]="sortField">
+          <option value="name">Name</option>
+          <option value="price">Price</option>
+        </select>
+      </div>
+      <div>Sort order:
+          <select [(ngModel)]="sortOrder">
+            <option [ngValue]=true>Acs</option>
+            <option [ngValue]=false>Desc</option>
+          </select>
+        </div>
       
-      <li *ngFor='let product of products$ | async'>
+      <li *ngFor="let product of products$ | async | orderby : sortField : sortOrder ">
             <app-product 
             [product]="product" 
             (addToCartEvent)="addToCart($event)"></app-product> 
