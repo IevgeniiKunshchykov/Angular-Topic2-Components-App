@@ -6,9 +6,11 @@ export class GeneratorService {
   private alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   private digits = '0123456789'.split('');
 
+  // Параметр конструктора будет расценитваться как зависимость.
   constructor(private sequenceLeght: number) {
   }
 
+  // Параметр из конструктора надо перенести сюда
   generateSequesnce(): string {
 
     let sequence = '';

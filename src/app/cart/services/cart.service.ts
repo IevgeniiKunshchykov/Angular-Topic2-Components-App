@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CartItem } from '../models/cart-item';
 import { IProduct } from 'src/app/products/interfaces/iproduct';
 import { Observable, of, Subject } from 'rxjs';
+// лишняя зависимость
 import { forEach } from '@angular/router/src/utils/collection';
 
 @Injectable({
@@ -53,6 +54,7 @@ export class CartService {
   }
 
   increaseCount(id: number) {
+    // можно так, а можно найти индекс используя метод массива findIndex()
     for (const cartItem of this.cartItems) {
       if (cartItem.id === id) {
         cartItem.count++;
@@ -61,6 +63,7 @@ export class CartService {
   }
 
   decreaseCount(id: number) {
+    // можно так, а можно найти индекс используя метод массива findIndex()
     for (const cartItem of this.cartItems) {
       if (cartItem.id === id) {
         cartItem.count--;

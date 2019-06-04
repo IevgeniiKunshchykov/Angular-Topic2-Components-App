@@ -9,16 +9,17 @@
       </div>
       <div>Sort order:
           <select [(ngModel)]="sortOrder">
-            <option [ngValue]=true>Acs</option>
-            <option [ngValue]=false>Desc</option>
+            <!-- В кавычках значение выглядит получше -->
+            <option [ngValue]="true">Acs</option>
+            <option [ngValue]="false">Desc</option>
           </select>
         </div>
-      
+
       <li *ngFor="let product of products$ | async | orderby : sortField : sortOrder ">
-            <app-product 
-            [product]="product" 
-            (addToCartEvent)="addToCart($event)"></app-product> 
-      <li> 
-           
+            <app-product
+            [product]="product"
+            (addToCartEvent)="addToCart($event)"></app-product>
+      <li>
+
     </ul>
 </div>

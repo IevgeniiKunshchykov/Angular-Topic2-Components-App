@@ -17,6 +17,8 @@ export class AboutComponent implements OnInit {
   generatedSequence: string;
 
   constructor(
+    // Если внедряем как приватные свойства, то нельзя использовать в шаблоне
+    // Чтобы увидеть ошибки запустите билд ng build --prod
     @Optional() private localStorageService: LocalStorageService,
     private configOptionsService: ConfigOptionsService,
     private constantsService: ConstantsService,
