@@ -8,6 +8,8 @@ export class ConfigOptions implements IConfigOptions {
     public connectionString?: string;
     public encryptionKey?: string;
 
+    // Почему бы не добавить модификатор доступа public к параметрам?
+    // Не нужно будет описыать отдельно поля и делать инициализацию.
     constructor(id: number, login: string, email?: string, mode?: string, connectionString?: string, encryptionKey?: string
     ) {
         this.id = id;
