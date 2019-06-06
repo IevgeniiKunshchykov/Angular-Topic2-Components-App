@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../models/cart-item';
 import { IProduct } from 'src/app/products/interfaces/iproduct';
-import { Observable, of, Subject } from 'rxjs';
-// лишняя зависимость
-import { forEach } from '@angular/router/src/utils/collection';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +16,7 @@ export class CartService {
   private totalCount$: Observable<number> = this.totalCount.asObservable();
   private totalPrice$: Observable<number> = this.totalPrice.asObservable();
 
-  private counter: 0;
+  private counter= 0;
 
   constructor() {
   }
@@ -30,7 +28,6 @@ export class CartService {
   addProductToCart(product: IProduct): void {
 
     this.counter++;
-
     const cartItem = new CartItem();
     cartItem.id = this.counter;
     cartItem.count = 1;
@@ -54,21 +51,11 @@ export class CartService {
   }
 
   increaseCount(id: number) {
-    // можно так, а можно найти индекс используя метод массива findIndex()
-    for (const cartItem of this.cartItems) {
-      if (cartItem.id === id) {
-        cartItem.count++;
-      }
-    }
+    this.cartItems[this.cartItems.findIndex(x => x.id === id)].count++;
   }
 
   decreaseCount(id: number) {
-    // можно так, а можно найти индекс используя метод массива findIndex()
-    for (const cartItem of this.cartItems) {
-      if (cartItem.id === id) {
-        cartItem.count--;
-      }
-    }
+    this.cartItems[this.cartItems.findIndex(x => x.id === id)].count--;
   }
 
   getTotalCount(): Observable<number> {

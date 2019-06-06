@@ -1,11 +1,8 @@
 import { GeneratorService } from './generator.service';
+import { InjectionToken } from '@angular/core';
 
-// В таком варианте вы возвращаете сервис, а надо вернуть уже готовую последовательность
-export function GeneratorServiceFactory(n: number) {
-  return () => new GeneratorService(n);
+export const GeneratedSequence = new InjectionToken<string>('generated Sequence');
+
+export function GeneratorServiceFactory(digitsCount: number) {
+  return (gs: GeneratorService) => gs.generateSequesnce(digitsCount);
 }
-
-// Примерно в такой форме должен быть этот сервис
-// export function GeneratorServiceFactory(n: number) {
-//   return (gs: GeneratorService) => gs.generate(n);
-// }

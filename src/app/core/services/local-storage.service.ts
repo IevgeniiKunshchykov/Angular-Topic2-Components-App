@@ -1,35 +1,28 @@
 import { Injectable } from '@angular/core';
 import { CoreModule } from '../core.module';
-import { of, Observable } from 'rxjs';
+import { of, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: CoreModule
 })
 export class LocalStorageService {
 
-  // Есть стандартный веб апи localStorage, который позволяет в браузере ххранить данные
-  // Этот сервис должен быть оберткой вокруг такого апи.
-  // https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-
-  private items: string[] = [];
-  private items$: Observable<string[]> = of(this.items);
+  private itemSubj: Subject<string> = new Subject<string>();
+  private item$ : Observable<string> = this.itemSubj.asObservable();
 
   constructor() { }
 
-  getItem(): Observable<string[]> {
-    return this.items$;
+  getItem(): Observable<string> {
+    return this.item$;
   }
 
   setItem(item: string) {
-
-    this.items.push(item);
+    window.localStorage.setItem('item', item);
+    this.itemSubj.next(window.localStorage.getItem('item'));
   }
 
   removeItem(item: string) {
-    const index = this.items.indexOf(item);
-
-    if (index >= 0) {
-      this.items.splice(index, 1);
-    }
+    window.localStorage.removeItem('item');
+    this.itemSubj.next(null);
   }
 }

@@ -7,16 +7,16 @@
     style="border-style: solid; border-color: coral; border-width: 2px; padding: 5px; margin: 5px">
     <h3>Local storage service</h3>
     <div>
-      <input type="text" #item>
-      <button (click)="localStorageService.setItem(item.value); item.value = '';">Add item</button>
+      <input type="text" #setItem>
+      <button (click)="localStorageService.setItem(setItem.value); setItem.value = '';">Set item</button>
     </div>
     <br>
-    <h4>Items:</h4>
-    <ul *ngFor="let item of localStorageService.getItem() | async">
-      <li>
-        {{item}} <button style="margin: 10 0 0 0" (click)="localStorageService.removeItem(item);">Remove item</button>
-      </li>
-    </ul>
+    <h4>Item:</h4>
+
+    <div *ngIf="item">
+      <input value={{item}} #inputitem>
+      <button style="margin: 10 0 0 0" (click)="localStorageService.removeItem(inputitem);">Remove item</button>
+    </div>
   </div>
 
   <div [appChangeStyle]="'30px'"
@@ -28,8 +28,10 @@
   <div [appChangeStyle]="'25px'"
     style="border-style: solid; border-color: coral; border-width: 2px; padding: 5px; margin: 5px">
     <h4>Constants service</h4>
-    <div>App: {{constantsService.app}}</div>
-    <div>Version: {{constantsService.version.full}}</div>
+    <div *ngIf="constants">
+      <div>App: {{constants.app}}</div>
+      <div>Version: {{constants.version.full}}</div>
+    </div>
   </div>
 
   <div [appChangeStyle]="'20px'"

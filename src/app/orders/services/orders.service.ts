@@ -18,9 +18,6 @@ export class OrdersService {
   }
 
   makeOrder(order: IOrder) {
-
-    console.log(order);
-
     this.orders.push(order);
     this.ordersSubject.next(this.orders);
   }

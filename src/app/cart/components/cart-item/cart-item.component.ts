@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CartItem } from '../../models/cart-item';
-import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-cart-item',
@@ -11,23 +10,21 @@ export class CartItemComponent implements OnInit {
 
   @Input() cartItem: CartItem;
   @Output() removeCartItem: EventEmitter<CartItem> = new EventEmitter<CartItem>();
+  @Output() increaseCount: EventEmitter<CartItem> = new EventEmitter<CartItem>();
+  @Output() decreaseCount: EventEmitter<CartItem> = new EventEmitter<CartItem>();
 
-  // Желательно не внедрять в презентационный компонент зависимости, а генерить аутпут для родительского компонента.
-  // Там уже есть зависимость.
-  // Компонент без зависимостей проще.
-  constructor(private cartService: CartService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
   countWheelTurned(event: WheelEvent) {
-    console.log(event);
     if (event.deltaY < 0) {
-      this.cartService.increaseCount(this.cartItem.id);
+      this.increaseCount.emit(this.cartItem);
     }
 
     if (event.deltaY > 0) {
-      this.cartService.decreaseCount(this.cartItem.id);
+      this.decreaseCount.emit(this.cartItem);
     }
   }
 

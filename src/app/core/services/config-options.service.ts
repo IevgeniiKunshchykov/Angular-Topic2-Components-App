@@ -16,10 +16,7 @@ export class ConfigOptionsService {
   constructor() { }
 
   setConfigOptions(configOptions: IConfigOptions) {
-    // Такой вариант полностью перепишет один объект другим
-    // Как вариант можно попробовать так
-    this.configOptions = {...this.configOptions, ...configOptions};
-    // this.configOptions = configOptions;
+    this.configOptions = {...this.configOptions, ...configOptions};    
     this.configOptionsSubject.next(this.configOptions);
   }
 

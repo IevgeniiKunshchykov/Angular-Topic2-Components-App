@@ -6,16 +6,14 @@ export class GeneratorService {
   private alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
   private digits = '0123456789'.split('');
 
-  // Параметр конструктора будет расценитваться как зависимость.
-  constructor(private sequenceLeght: number) {
+  constructor() {
   }
 
-  // Параметр из конструктора надо перенести сюда
-  generateSequesnce(): string {
+  generateSequesnce(sequenceLeght: number): string {
 
     let sequence = '';
 
-    for (let index = 0; index < this.sequenceLeght; index++) {
+    for (let index = 0; index < sequenceLeght; index++) {
 
       const isDigit = this.generateRandomBool();
       if (isDigit) {

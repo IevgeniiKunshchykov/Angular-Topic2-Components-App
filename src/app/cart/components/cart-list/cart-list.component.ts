@@ -67,6 +67,14 @@ export class CartListComponent implements OnInit, OnDestroy, DoCheck {
     this.cartService.removeProductFromCart(cartItem);
   }
 
+  increaseCount(cartItem: CartItem) {
+    this.cartService.increaseCount(cartItem.id);
+  }
+
+  decreaseCount(cartItem: CartItem) {
+    this.cartService.decreaseCount(cartItem.id);
+  }
+
   ngOnDestroy(): void {
     // отписка от основной и дочерних
     this.sub.unsubscribe();

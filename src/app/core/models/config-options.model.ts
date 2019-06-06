@@ -1,22 +1,16 @@
 import { IConfigOptions } from '../interfaces/config-options.interface';
 
 export class ConfigOptions implements IConfigOptions {
-    public id: number;
-    public login: string;
-    public email?: string;
-    public mode?: string;
-    public connectionString?: string;
-    public encryptionKey?: string;
 
-    // Почему бы не добавить модификатор доступа public к параметрам?
-    // Не нужно будет описыать отдельно поля и делать инициализацию.
-    constructor(id: number, login: string, email?: string, mode?: string, connectionString?: string, encryptionKey?: string
+    constructor(
+        public id: number, 
+        public login: string, 
+        public email?: string, 
+        public mode?: string, 
+        public connectionString?: string, 
+        public encryptionKey?: string
     ) {
-        this.id = id;
-        this.login = login;
-        this.email = email;
         this.mode = mode || 'Dev';
         this.connectionString = connectionString || 'TestConnectionString';
-        this.encryptionKey = encryptionKey;
     }
 }

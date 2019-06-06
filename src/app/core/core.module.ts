@@ -1,25 +1,15 @@
-import { NgModule } from '@angular/core';
+import { NgModule, InjectionToken } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CartService } from '../cart/services/cart.service';
-import { ProductService } from '../products/services/product.service';
-import { OrdersService } from '../orders/services/orders.service';
-import { ConstantsService } from './services/constants.service';
 import { GeneratorService } from './services/generator.service';
-import { GeneratorServiceFactory } from './services/generator.factory';
+import { GeneratorServiceFactory, GeneratedSequence } from './services/generator.factory';
+
+export const Constants = new InjectionToken<string>('constants');
 
 @NgModule({
   declarations: [],
   providers: [
-    // Этот сервис
-    CartService,
-    // и этот сервис
-    ProductService,
-    // и этот сервис не надо тут регистрировать.
-    // Они саморегистрируемые сервисы через их декоратор.
-    // Все остальные можно тут настроить
-    OrdersService,
     {
-      provide: ConstantsService,
+      provide: Constants,
       useValue: {
         app: 'TestApp',
         version: {
@@ -27,13 +17,11 @@ import { GeneratorServiceFactory } from './services/generator.factory';
         }
       }
     },
-    // Надо добавить
-    // GeneratorService
+    GeneratorService,
     {
-      provide: GeneratorService,
-      useFactory: GeneratorServiceFactory(100)
-      // Надо добавить
-      // deps: [GeneratorService]
+      provide: GeneratedSequence,
+      useFactory: GeneratorServiceFactory(100),      
+      deps: [GeneratorService]
     }
   ],
   imports: [
