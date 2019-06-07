@@ -11,6 +11,7 @@ export class ProductComponent implements OnInit {
   @Input() product: IProduct;
 
   @Output() addToCartEvent: EventEmitter<IProduct> = new EventEmitter<IProduct>();
+  @Output() showCommentsEvent: EventEmitter<IProduct> = new EventEmitter<IProduct>();
 
   constructor() { }
 
@@ -19,5 +20,9 @@ export class ProductComponent implements OnInit {
 
   addToCart(product: IProduct) {
     this.addToCartEvent.emit(product);
+  }
+
+  showComments(product: IProduct) {
+    this.showCommentsEvent.emit(product);
   }
 }

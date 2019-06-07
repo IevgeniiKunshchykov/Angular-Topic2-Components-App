@@ -39,8 +39,11 @@
           </ul>
       </td>
     </tr>
-  </table>
-  <div align="right">
+  </table>  
+  <div align="right" style="display: inline;">
+      <button (click)="showComments(product);">Show comments</button>
+    </div>
+  <div align="right" style="display: inline;">
     <button (click)="addToCart(product);" [disabled]="!product.isAvailable">Add to cart</button>
   </div>
 </div>

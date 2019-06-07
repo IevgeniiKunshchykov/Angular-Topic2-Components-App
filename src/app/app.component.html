@@ -1,8 +1,30 @@
 <h1 align="center" #appTitle>qwe</h1>
 
-<app-about></app-about>
+<div>
+    <nav class="navbar navbar-default">
+        <div>
+            <ul class="nav navbar-nav">
+                <li routerLinkActive="active">
+                    <a routerLink="/products-list">Products</a>
+                </li>
+                <li routerLinkActive="active">
+                    <a routerLink="/about">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
 
-<div style="text-align:center; display: inline;">
+<div>
+    <div class="col-md-9">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="col-md-2">
+        <router-outlet name='comments'></router-outlet>
+    </div>
+</div>
+
+<!-- <div style="text-align:center; display: inline;">
     <div style="float: left">
         <app-product-list></app-product-list>
     </div>
@@ -11,6 +33,5 @@
     </div>
     <div style="float: left">
         <app-orders-list align="top"></app-orders-list>
-    </div>    
-</div>
-
+    </div>
+</div> -->

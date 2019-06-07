@@ -1,0 +1,26 @@
+<div class="productComments">
+  <div align='right'>
+    <button style="width: 25px; height: 25px; align-content: center" (click)="close()">X</button>
+  </div>
+  <div>
+    <p *ngIf="!product">
+      No product found
+    </p>
+
+    <div *ngIf="product">
+      <p>
+        Comments for {{product.name}}
+      </p>
+      <div>
+        <ul>
+          <li *ngFor="let comment of product.comments">
+            <div class="productCommentItem">
+              {{comment}}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
