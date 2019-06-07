@@ -15,8 +15,9 @@
     </div>
 
     <li *ngFor="let product of products$ | async | orderby : sortField : sortOrder ">
-      <app-product [product]="product" (addToCartEvent)="addToCart($event)"
-        (showCommentsEvent)="showCommentsEvent($event)"></app-product>
+      <app-product-info [product]="product" (addToCartEvent)="addToCart($event)"
+        (showCommentsEvent)="showCommentsEvent($event)" (showDetailedInfoEvent)="showDetailedInfoEvent($event)"
+        (editEvent)="editEvent($event)"></app-product-info>
     <li>
 
   </ul>

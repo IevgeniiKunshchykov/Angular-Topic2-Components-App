@@ -1,5 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../interfaces/iproduct';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from '../../models/product';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -8,21 +11,17 @@ import { IProduct } from '../../interfaces/iproduct';
 })
 export class ProductComponent implements OnInit {
 
-  @Input() product: IProduct;
+  product: IProduct;
 
-  @Output() addToCartEvent: EventEmitter<IProduct> = new EventEmitter<IProduct>();
-  @Output() showCommentsEvent: EventEmitter<IProduct> = new EventEmitter<IProduct>();
-
-  constructor() { }
+  constructor(private route: ActivatedRoute,
+    private productService: ProductService) { }
 
   ngOnInit() {
-  }
-
-  addToCart(product: IProduct) {
-    this.addToCartEvent.emit(product);
-  }
-
-  showComments(product: IProduct) {
-    this.showCommentsEvent.emit(product);
+    const id = this.route.snapshot.params.id;
+    if (!id) {
+      this.product = new Product();
+    } else {
+      this.product = this.productService.getProduct(+id);
+    }
   }
 }

@@ -1,4 +1,4 @@
-<div align="left" [ngClass]="{
+<div align="left" *ngIf='product' [ngClass]="{
   avaliableProduct: product.isAvailable,
   notAvaliableProduct: !product.isAvailable
 }" class="productItem">

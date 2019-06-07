@@ -52,7 +52,7 @@ export class ProductService {
   }
 
   getProduct(id: number): IProduct {
-    return this.products.find(x=> x.id === id);
+    return this.products.find(x=> x.id === +id);
   }
 
   createProduct(product: IProduct): void {

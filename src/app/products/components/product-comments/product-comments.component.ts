@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../services/product.service';
+import { ProductService } from '../../services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IProduct } from '../interfaces/iproduct';
+import { IProduct } from '../../interfaces/iproduct';
 
 @Component({
   selector: 'app-product-comments',

@@ -1,0 +1,27 @@
+<div align="left" [ngClass]="{
+  avaliableProduct: product.isAvailable,
+  notAvaliableProduct: !product.isAvailable
+}" class="productItem">
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td>{{product.name | uppercase}}</td>
+    </tr>
+    <tr>
+      <td>Price:</td>
+      <td>{{product.price | currency:'USD'}}</td>
+    </tr>
+  </table>
+  <div align="right" style="display: inline;">
+    <button (click)="edit(product);">Edit</button>
+  </div>
+  <div align="right" style="display: inline;">
+    <button (click)="showDetailedInfo(product);">Detailed info</button>
+  </div>
+  <div align="right" style="display: inline;">
+    <button (click)="showComments(product);">Show comments</button>
+  </div>
+  <div align="right" style="display: inline;">
+    <button (click)="addToCart(product);" [disabled]="!product.isAvailable">Add to cart</button>
+  </div>
+</div>

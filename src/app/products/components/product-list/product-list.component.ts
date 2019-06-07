@@ -33,4 +33,12 @@ export class ProductListComponent implements OnInit {
   showCommentsEvent(product: IProduct) {
     this.router.navigate([{ outlets: { comments: ['product-comments', { id: product.id }] } }]);
   }
+
+  showDetailedInfoEvent(product: IProduct) {
+    this.router.navigate(['products-list/info', product.id ]);
+  }
+
+  editEvent(product: IProduct) {
+    this.router.navigate(['products-list/info', product.id ]);
+  }
 }
