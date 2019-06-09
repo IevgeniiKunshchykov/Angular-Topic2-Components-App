@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  
+
   private products: Array<IProduct> = [];
 
   private products$: Promise<IProduct[]> = new Promise((resolve, reject) => {
@@ -52,10 +52,17 @@ export class ProductService {
   }
 
   getProduct(id: number): IProduct {
-    return this.products.find(x=> x.id === +id);
+    return this.products.find(x => x.id === +id);
   }
 
   createProduct(product: IProduct): void {
     this.products.push(product);
+  }
+
+  updateProduct(product: IProduct) {
+    const i = this.products.findIndex(t => t.id === product.id);
+    if (i > -1) {
+      this.products.splice(i, 1, product);
+    }
   }
 }

@@ -2,48 +2,67 @@
   avaliableProduct: product.isAvailable,
   notAvaliableProduct: !product.isAvailable
 }" class="productItem">
-  <table>
-    <tr>
-      <td>Name:</td>
-      <td>{{product.name | uppercase}}</td>
-    </tr>
-    <tr>
-      <td>Description:</td>
-      <td>{{product.description}}</td>
-    </tr>
-    <tr >
-      <td>Price:</td>
-      <td>{{product.price | currency:'USD'}}</td>
-    </tr>
-    <tr>
-      <td>Is Available:</td>
-      <td><input type="checkbox" disabled="true" [(ngModel)]="product.isAvailable"/></td>
-    </tr>
-    <tr>
-      <td>Producer:</td>
-      <td>
-        <span [ngSwitch]="product.producer">
-          <span *ngSwitchCase =1>USA</span>
-          <span *ngSwitchCase =2>UK</span>
-          <span *ngSwitchCase =3>Ukraine</span>
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td>Ingredients:</td>
-      <td>
+  <fieldset [disabled]='readonly'>
+    <table>
+      <tr>
+        <td>Name:</td>
+        <td>
+          <input [ngModel]="product.name | uppercase" type="text"  
+          (ngModelChange)="product.name=$event"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Description:</td>
+        <td>
+          <input [(ngModel)]="product.description" type="text" />
+        </td>
+      </tr>
+      <tr>
+        <td>Price:</td>
+        <td>
+          <input [ngModel]="product.price" type="number" 
+          (ngModelChange)="product.price=$event"/>
+        </td>
+      </tr>
+      <tr>
+        <td>Is Available:</td>
+        <td>
+          <input type="checkbox" [checked]="product.isAvailable"
+            (change)="product.isAvailable = !product.isAvailable" />
+        </td>
+      </tr>
+      <tr>
+        <td>Producer:</td>
+        <td>
+          <select [(ngModel)]="product.producer">
+            <option value=1>USA</option>
+            <option value=2>UK</option>
+            <option value=3>Ukraine</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Ingredients:</td>
+        <td>
+          <input #igredient type="text" />
+        </td>
+        <td>
+          <button (click)="onAddIngredient(igredient.value); igredient.value = null;">Add Ingredient</button>
+        </td>
+        <td>          
           <ul>
-              <li *ngFor='let ingredient of product.ingredients'>
-                {{ingredient | lowercase}}
-              </li>
+            <li *ngFor='let ingredient of product.ingredients'>
+              {{ingredient | lowercase}}
+            </li>
           </ul>
-      </td>
-    </tr>
-  </table>  
+        </td>
+      </tr>
+    </table>
+  </fieldset>
   <div align="right" style="display: inline;">
-      <button (click)="showComments(product);">Show comments</button>
-    </div>
+    <button (click)="save(product);">Save</button>
+  </div>
   <div align="right" style="display: inline;">
-    <button (click)="addToCart(product);" [disabled]="!product.isAvailable">Add to cart</button>
+    <button (click)="cancel();">Cancel</button>
   </div>
 </div>
