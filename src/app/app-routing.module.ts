@@ -5,6 +5,8 @@ import { AboutComponent } from './layout/about/about.component';
 import { ProductCommentsComponent } from './products/components/product-comments/product-comments.component';
 import { CartItemComponent, CartListComponent } from './cart/components';
 import { OrdersListComponent } from './orders/components/orders-list/orders-list.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { LoginComponent } from './login/login/login.component';
 
 const routes: Routes = [
   {
@@ -34,6 +36,16 @@ const routes: Routes = [
   {
     path: 'orders',
     component: OrdersListComponent
+  },
+  {
+    path: 'admin',
+    loadChildren: './admin/admin.module#AdminModule',
+    canLoad: [AuthGuard]
+  },
+  { 
+    path: 'login', 
+    component: LoginComponent,
+    data: { title: 'Login' }
   },
   {
     path: 'product-comments',
