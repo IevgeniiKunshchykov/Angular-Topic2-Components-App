@@ -21,6 +21,7 @@ export class ProductInfoComponent implements OnInit {
   }
 
   addToCart(product: IProduct) {
+    window.alert(product.name + ' is added to cart');
     this.addToCartEvent.emit(product);
   }
 

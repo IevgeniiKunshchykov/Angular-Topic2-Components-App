@@ -12,7 +12,8 @@ export class ProductCommentsComponent implements OnInit {
 
   product: IProduct;
 
-  constructor(private productService: ProductService,
+  constructor(
+    private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router) { }
 

@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../models/cart-item';
 import { IProduct } from 'src/app/products/interfaces/iproduct';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  private cartItems: Array<CartItem> = [];
-  private totalCount: Subject<number> = new Subject<number>();
-  private totalPrice: Subject<number> = new Subject<number>();
-  private cartItemsSubject: Subject<CartItem[]> = new Subject<CartItem[]>();
-  private cartItems$: Observable<CartItem[]> = this.cartItemsSubject.asObservable();
-  private totalCount$: Observable<number> = this.totalCount.asObservable();
-  private totalPrice$: Observable<number> = this.totalPrice.asObservable();
+  private cartInfo = {
+    totalCount: 0,
+    totalPrice: 0
+  }
 
-  private counter= 0;
+  private cartItems: Array<CartItem> = [];
+  private cartInfoSubj: Subject<any> = new Subject<any>();
+  private cartItems$: Observable<CartItem[]> = of(this.cartItems);
+  private cartInfo$: Observable<any> = this.cartInfoSubj.asObservable();//of(this.cartInfo);
+
+
+  private counter = 0;
 
   constructor() {
   }
@@ -35,7 +38,6 @@ export class CartService {
 
     this.cartItems.push(cartItem);
 
-    this.cartItemsSubject.next(this.cartItems);
     this.refreshTotalCount();
     this.refreshTotalPrice();
   }
@@ -45,43 +47,28 @@ export class CartService {
     this.cartItems.splice(index, 1);
     this.counter--;
 
-    this.cartItemsSubject.next(this.cartItems);
     this.refreshTotalCount();
     this.refreshTotalPrice();
   }
 
   increaseCount(id: number) {
     this.cartItems[this.cartItems.findIndex(x => x.id === id)].count++;
+    this.refreshCartInfo();
   }
 
   decreaseCount(id: number) {
     this.cartItems[this.cartItems.findIndex(x => x.id === id)].count--;
+    this.refreshCartInfo();
   }
 
-  getTotalCount(): Observable<number> {
-    return this.totalCount$;
+  getCartInfo(): Observable<any> {
+    return this.cartInfo$;
   }
 
-  getTotalPrice(): Observable<number> {
-    return this.totalPrice$;
-  }
-
-  refreshTotalCount() {
-    let count = 0;
-    for (const cartItem of this.cartItems) {
-      count += cartItem.count;
-    }
-
-    this.totalCount.next(count);
-  }
-
-  refreshTotalPrice() {
-    let price = 0;
-    for (const cartItem of this.cartItems) {
-      price += cartItem.count * cartItem.product.price;
-    }
-
-    this.totalPrice.next(price);
+  refreshCartInfo() {
+    this.refreshTotalCount();
+    this.refreshTotalPrice();
+    this.cartInfoSubj.next(this.cartInfo);
   }
 
   clearCart() {
@@ -89,5 +76,23 @@ export class CartService {
     this.cartItems.splice(0, this.cartItems.length);
     this.refreshTotalCount();
     this.refreshTotalPrice();
+  }
+
+  private refreshTotalCount() {
+    let count = 0;
+    for (const cartItem of this.cartItems) {
+      count += cartItem.count;
+    }
+
+    this.cartInfo.totalCount = count;
+  }
+
+  private refreshTotalPrice() {
+    let price = 0;
+    for (const cartItem of this.cartItems) {
+      price += cartItem.count * cartItem.product.price;
+    }
+
+    this.cartInfo.totalPrice = price;
   }
 }

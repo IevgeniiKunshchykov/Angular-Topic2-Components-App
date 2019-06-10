@@ -41,4 +41,8 @@ export class ProductListComponent implements OnInit {
   editEvent(product: IProduct) {
     this.router.navigate(['products-list/edit', product.id]);
   }
+
+  goToCart() {
+    this.router.navigate(['cart']);
+  }
 }

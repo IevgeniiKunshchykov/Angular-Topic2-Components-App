@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IOrder } from '../interfaces/ioder';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +8,8 @@ import { Subject, Observable } from 'rxjs';
 export class OrdersService {
 
   private orders: Array<IOrder> = [];
-  private ordersSubject: Subject<IOrder[]> = new Subject<IOrder[]>();
-  private orders$: Observable<IOrder[]> = this.ordersSubject.asObservable();
+  //private ordersSubject: Subject<IOrder[]> = new Subject<IOrder[]>();
+  private orders$: Observable<IOrder[]> =  of(this.orders);//this.ordersSubject.asObservable();
 
   constructor() { }
 
@@ -19,6 +19,6 @@ export class OrdersService {
 
   makeOrder(order: IOrder) {
     this.orders.push(order);
-    this.ordersSubject.next(this.orders);
+    //this.ordersSubject.next(this.orders);
   }
 }

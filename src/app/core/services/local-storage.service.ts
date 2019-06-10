@@ -8,7 +8,7 @@ import { of, Observable, Subject } from 'rxjs';
 export class LocalStorageService {
 
   private itemSubj: Subject<string> = new Subject<string>();
-  private item$ : Observable<string> = this.itemSubj.asObservable();
+  private item$: Observable<string> = this.itemSubj.asObservable();
 
   constructor() { }
 

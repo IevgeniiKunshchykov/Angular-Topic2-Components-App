@@ -20,7 +20,7 @@ export const Constants = new InjectionToken<string>('constants');
     GeneratorService,
     {
       provide: GeneratedSequence,
-      useFactory: GeneratorServiceFactory(100),      
+      useFactory: GeneratorServiceFactory(100),
       deps: [GeneratorService]
     }
   ],

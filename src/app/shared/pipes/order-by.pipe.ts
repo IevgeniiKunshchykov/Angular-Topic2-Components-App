@@ -22,8 +22,7 @@ export class OrderByPipe implements PipeTransform {
           return 0;
         }
       });
-    }
-    else {
+    } else {
       return value;
     }
   }

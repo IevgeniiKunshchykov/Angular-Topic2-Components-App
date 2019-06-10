@@ -16,7 +16,7 @@ export class ConfigOptionsService {
   constructor() { }
 
   setConfigOptions(configOptions: IConfigOptions) {
-    this.configOptions = {...this.configOptions, ...configOptions};    
+    this.configOptions = { ...this.configOptions, ...configOptions };
     this.configOptionsSubject.next(this.configOptions);
   }
 

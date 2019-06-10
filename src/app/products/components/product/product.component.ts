@@ -15,7 +15,8 @@ export class ProductComponent implements OnInit {
 
   readonly = false;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private productService: ProductService,
     private router: Router) { }
 
@@ -23,7 +24,7 @@ export class ProductComponent implements OnInit {
     const id = this.route.snapshot.params.id;
 
     if (this.route.snapshot.params.hasOwnProperty('readonly')) {
-      this.readonly = this.route.snapshot.params.readonly.toLowerCase() == 'true';
+      this.readonly = this.route.snapshot.params.readonly.toLowerCase() === 'true';
     }
 
     if (!id) {

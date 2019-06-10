@@ -16,15 +16,16 @@ import { AboutComponent } from './layout/about/about.component';
     AppComponent,
     AboutComponent
   ],
-  imports: [BrowserModule,
-    AppRoutingModule,
+  imports: [
+    BrowserModule,
     FormsModule,
     CartModule,
     ProductsModule,
     OrdersModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

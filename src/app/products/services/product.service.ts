@@ -24,7 +24,7 @@ export class ProductService {
     product1.price = 5;
     product1.producer = 3;
     product1.ingredients = ['Egg', 'Dough'];
-    product1.comments = ['Good', 'Soft', 'Dirty :(']
+    product1.comments = ['Good', 'Soft', 'Dirty :('];
 
     const product2 = new Product();
     product2.id = 2;
@@ -33,7 +33,7 @@ export class ProductService {
     product2.price = 4;
     product2.producer = 1;
     product2.ingredients = ['Water', 'Smth Black'];
-    product2.comments = ['Very sweet', 'So black :)']
+    product2.comments = ['Very sweet', 'So black :)'];
 
     const product3 = new Product();
     product3.id = 3;

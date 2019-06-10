@@ -10,7 +10,6 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('appTitle') apptitle: ElementRef;
 
   constructor() {
-    
   }
 
   ngAfterViewInit(): void {
