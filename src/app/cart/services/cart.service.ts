@@ -11,12 +11,12 @@ export class CartService {
   private cartInfo = {
     totalCount: 0,
     totalPrice: 0
-  }
+  };
 
   private cartItems: Array<CartItem> = [];
   private cartInfoSubj: Subject<any> = new Subject<any>();
   private cartItems$: Observable<CartItem[]> = of(this.cartItems);
-  private cartInfo$: Observable<any> = this.cartInfoSubj.asObservable();//of(this.cartInfo);
+  private cartInfo$: Observable<any> = this.cartInfoSubj.asObservable();
 
 
   private counter = 0;

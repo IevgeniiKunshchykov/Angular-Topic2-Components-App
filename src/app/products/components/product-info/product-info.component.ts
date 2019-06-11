@@ -18,7 +18,7 @@ export class ProductInfoComponent implements OnInit {
 
   constructor(public authService: AuthService) { }
 
-  ngOnInit() {    
+  ngOnInit() {
   }
 
   addToCart(product: IProduct) {

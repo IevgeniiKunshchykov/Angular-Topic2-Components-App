@@ -22,7 +22,7 @@ export class CartListComponent implements OnInit, OnDestroy, DoCheck {
   private sub: Subscription = new Subscription();
 
   constructor(
-    private cartService: CartService, 
+    private cartService: CartService,
     private orderService: OrdersService,
     private router: Router) {
   }

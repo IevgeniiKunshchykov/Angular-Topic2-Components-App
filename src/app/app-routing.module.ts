@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: 'products-list/info/:id',
     component: ProductComponent
-  }, 
+  },
   {
     path: 'about',
     component: AboutComponent
@@ -30,8 +30,8 @@ const routes: Routes = [
     loadChildren: './admin/admin.module#AdminModule',
     canLoad: [AuthGuard]
   },
-  { 
-    path: 'login', 
+  {
+    path: 'login',
     component: LoginComponent,
     data: { title: 'Login' }
   },
