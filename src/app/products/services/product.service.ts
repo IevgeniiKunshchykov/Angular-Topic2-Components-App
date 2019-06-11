@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class ProductService {
 
   private products: Array<IProduct> = [];
+  private counter: number = 1;
 
   private products$: Promise<IProduct[]> = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -18,7 +19,7 @@ export class ProductService {
   });
   constructor() {
     const product1 = new Product();
-    product1.id = 1;
+    product1.id = this.counter++;
     product1.name = 'Bread';
     product1.isAvailable = false;
     product1.price = 5;
@@ -27,7 +28,7 @@ export class ProductService {
     product1.comments = ['Good', 'Soft', 'Dirty :('];
 
     const product2 = new Product();
-    product2.id = 2;
+    product2.id = this.counter++;
     product2.name = 'Cola';
     product2.isAvailable = true;
     product2.price = 4;
@@ -36,7 +37,7 @@ export class ProductService {
     product2.comments = ['Very sweet', 'So black :)'];
 
     const product3 = new Product();
-    product3.id = 3;
+    product3.id = this.counter++;
     product3.name = 'Milk';
     product3.isAvailable = true;
     product3.price = 3;
@@ -56,6 +57,7 @@ export class ProductService {
   }
 
   createProduct(product: IProduct): void {
+    product.id = this.counter++;
     this.products.push(product);
   }
 

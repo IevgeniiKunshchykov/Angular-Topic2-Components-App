@@ -19,7 +19,7 @@ export class CartListComponent implements OnInit, OnDestroy, DoCheck {
   totalPrice: number;
   totalCount: number;
 
-  private sub: Subscription;
+  private sub: Subscription = new Subscription();
 
   constructor(
     private cartService: CartService, 
@@ -29,15 +29,12 @@ export class CartListComponent implements OnInit, OnDestroy, DoCheck {
 
   ngOnInit(): void {
     // основная подписка
-    this.sub = this.cartService.getCartItems().subscribe(x => {
+    this.sub.add(this.cartService.getCartItems().subscribe(x => {
       this.cartItems = x;
-    });
+    }));
 
-    console.log('totalqwe');
     // дочерние
     this.sub.add(this.cartService.getCartInfo().subscribe(x => {
-      console.log('total213');
-      console.log(x);
       this.totalCount = x.totalCount;
       this.totalPrice = x.totalPrice;
     }));

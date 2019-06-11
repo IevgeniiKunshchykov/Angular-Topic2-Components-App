@@ -1,7 +1,4 @@
-<div align="left" *ngIf='product' [ngClass]="{
-  avaliableProduct: product.isAvailable,
-  notAvaliableProduct: !product.isAvailable
-}" class="productItem">
+<div align="left" *ngIf='product' class="productItem">
   <fieldset [disabled]='readonly'>
     <table>
       <tr>
@@ -59,7 +56,7 @@
       </tr>
     </table>
   </fieldset>
-  <div align="right" style="display: inline;">
+  <div align="right" style="display: inline;" *ngIf='!readonly'>
     <button (click)="save(product);">Save</button>
   </div>
   <div align="right" style="display: inline;">

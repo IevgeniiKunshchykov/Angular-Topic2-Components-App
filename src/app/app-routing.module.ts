@@ -16,15 +16,7 @@ const routes: Routes = [
   {
     path: 'products-list/info/:id',
     component: ProductComponent
-  },
-  {
-    path: 'products-list/add',
-    component: ProductComponent
-  },
-  {
-    path: 'products-list/edit/:id',
-    component: ProductComponent
-  },
+  }, 
   {
     path: 'about',
     component: AboutComponent
@@ -32,10 +24,6 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartListComponent
-  },
-  {
-    path: 'orders',
-    component: OrdersListComponent
   },
   {
     path: 'admin',

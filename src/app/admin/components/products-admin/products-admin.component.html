@@ -1,3 +1,26 @@
-<p>
-  products-admin works!
-</p>
+<div class="productlist">
+    <h4>Products:</h4>
+    <button style="margin: 30" (click)=addProduct()>
+      Add new product
+    </button>
+    <ul>
+      <li *ngFor="let product of products$ | async">        
+          <div align="left" class="productItem">
+            <table>
+              <tr>
+                <td>Name:</td>
+                <td>{{product.name}}</td>
+              </tr>
+              <tr>
+                <td>Price:</td>
+                <td>{{product.price | currency:'USD'}}</td>
+              </tr>
+            </table>
+            <div align="right" style="display: inline;">
+              <button (click)="edit(product);">Edit</button>
+            </div>            
+          </div>
+        
+      <li>  
+    </ul>
+  </div>

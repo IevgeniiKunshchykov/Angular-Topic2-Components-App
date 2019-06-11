@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IProduct } from '../../interfaces/iproduct';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-product-info',
@@ -15,9 +16,9 @@ export class ProductInfoComponent implements OnInit {
   @Output() showDetailedInfoEvent: EventEmitter<IProduct> = new EventEmitter<IProduct>();
   @Output() editEvent: EventEmitter<IProduct> = new EventEmitter<IProduct>();
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
-  ngOnInit() {
+  ngOnInit() {    
   }
 
   addToCart(product: IProduct) {

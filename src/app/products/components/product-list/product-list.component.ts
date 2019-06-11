@@ -35,11 +35,11 @@ export class ProductListComponent implements OnInit {
   }
 
   showDetailedInfoEvent(product: IProduct) {
-    this.router.navigate(['products-list/info', product.id, { readonly: true }]);
+    this.router.navigate(['products-list/info', product.id]);
   }
 
   editEvent(product: IProduct) {
-    this.router.navigate(['products-list/edit', product.id]);
+    this.router.navigate(['admin/products/edit', product.id]);
   }
 
   goToCart() {

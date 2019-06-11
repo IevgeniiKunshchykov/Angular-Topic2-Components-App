@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { IProduct } from '../../interfaces/iproduct';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../../models/product';
@@ -18,13 +19,12 @@ export class ProductComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private router: Router) { }
+    private location: Location) { }
 
   ngOnInit() {
     const id = this.route.snapshot.params.id;
-
-    if (this.route.snapshot.params.hasOwnProperty('readonly')) {
-      this.readonly = this.route.snapshot.params.readonly.toLowerCase() === 'true';
+    if (this.route.snapshot.url.find(x => x.path === 'info')) {
+      this.readonly = true;
     }
 
     if (!id) {
@@ -39,11 +39,16 @@ export class ProductComponent implements OnInit {
   }
 
   save(p: IProduct) {
-    this.productService.updateProduct(p);
-    this.router.navigate(['']);
+    if (this.product.id) {
+      this.productService.updateProduct(p);
+    } else {
+      this.productService.createProduct(p);
+    }
+
+    this.location.back();
   }
 
   cancel() {
-    this.router.navigate(['']);
+    this.location.back();
   }
 }

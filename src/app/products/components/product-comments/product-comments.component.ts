@@ -20,7 +20,6 @@ export class ProductCommentsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(x => {
       this.product = this.productService.getProduct(+x.id);
-      console.log(this.product);
     });
   }
 
