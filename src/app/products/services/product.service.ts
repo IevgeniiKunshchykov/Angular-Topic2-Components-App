@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { IProduct } from '../interfaces/iproduct';
 import { Product } from '../models/product';
-import { Subject, Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,8 @@ import { Subject, Observable } from 'rxjs';
 export class ProductService {
 
   private counter = 1;
-
-  private productsSubj: Subject<IProduct[]> = new Subject<IProduct[]>();
-  private products$: Observable<IProduct[]> = this.productsSubj.asObservable();
+  
+  private productsSubj: BehaviorSubject<IProduct[]> = new BehaviorSubject<IProduct[]>(this.getStorageProducts());
 
   constructor() {
     const product1 = new Product();
@@ -48,7 +47,7 @@ export class ProductService {
   }
 
   getProducts(): Observable<Array<IProduct>> {
-    return this.products$;
+    return this.productsSubj.asObservable();
   }
 
   getProduct(id: number): IProduct {
