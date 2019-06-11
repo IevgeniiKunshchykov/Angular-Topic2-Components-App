@@ -31,3 +31,15 @@
 3. Use lowercase pipe in ProductComponent for ingredient
 4. Change productservice to return promise when getting all products. Use async pipe to display products
 5. Add OrderByPipe, register it in shared module. Use it in product list component to sort by name or price, asc or desc.
+
+## Actions - Navigation
+1. Implemented menu items and vagiation to them: Products, Cart, About, Admin, Login
+2. Implemented secondary router-outlet to show comments about product. 'Show comments' button is located near each product in the list.
+3. Implemented navigation to cart from product list and back to product list from cart.
+4. Implemented admin module which is lazy loaded.
+5. Implemented guard for admin module so that it is loaded only if user is logged in.
+6. Implemented navigation inside admin module: Products, Orders.
+7. You can create and edit product in admin module.
+8. You can watch list of orders in admin module. Orders are created from the cart.
+9. If user is logged in then 'Edit' button also appears on products-list page near each product
+10. Implemented product resolve guard and it is used to resolve product when you navigate to ProductComponent either to watch detailed info or edit or create product.

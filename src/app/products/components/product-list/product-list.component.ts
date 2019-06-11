@@ -3,6 +3,7 @@ import { IProduct } from '../../interfaces/iproduct';
 import { CartService } from 'src/app/cart/services/cart.service';
 import { ProductService } from '../../services/product.service';
 import { Router, NavigationExtras } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -14,7 +15,7 @@ export class ProductListComponent implements OnInit {
 
   sortField = 'price';
   sortOrder = true;
-  products$: Promise<Array<IProduct>>;
+  products$: Observable<Array<IProduct>>;
 
   constructor(
     private productService: ProductService,

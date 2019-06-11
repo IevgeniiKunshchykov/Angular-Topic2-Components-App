@@ -11,7 +11,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 })
 export class ProductsAdminComponent implements OnInit {
 
-  products$: Promise<Array<IProduct>>;
+  products$: Observable<Array<IProduct>>;
 
   private navigationExtras: NavigationExtras = {
     relativeTo: this.route

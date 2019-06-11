@@ -2,20 +2,18 @@ import { Injectable } from '@angular/core';
 
 import { IProduct } from '../interfaces/iproduct';
 import { Product } from '../models/product';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private products: Array<IProduct> = [];
   private counter = 1;
 
-  private products$: Promise<IProduct[]> = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(this.products);
-    }, 1000);
-  });
+  private productsSubj: Subject<IProduct[]> = new Subject<IProduct[]>();
+  private products$: Observable<IProduct[]> = this.productsSubj.asObservable();
+
   constructor() {
     const product1 = new Product();
     product1.id = this.counter++;
@@ -44,26 +42,38 @@ export class ProductService {
     product3.ingredients = ['Milk'];
     product3.comments = ['Best ever', 'Very fresh'];
 
-    this.products.push(product1, product2, product3);
+    localStorage.setItem(product1.id.toString(), JSON.stringify(product1));
+    localStorage.setItem(product2.id.toString(), JSON.stringify(product2));
+    localStorage.setItem(product3.id.toString(), JSON.stringify(product3));
   }
 
-  getProducts(): Promise<Array<IProduct>> {
+  getProducts(): Observable<Array<IProduct>> {
     return this.products$;
   }
 
   getProduct(id: number): IProduct {
-    return this.products.find(x => x.id === +id);
+    return JSON.parse(localStorage.getItem(id.toString()));
   }
 
   createProduct(product: IProduct): void {
     product.id = this.counter++;
-    this.products.push(product);
+    localStorage.setItem(product.id.toString(), JSON.stringify(product));
+    this.productsSubj.next(this.getStorageProducts());
   }
 
   updateProduct(product: IProduct) {
-    const i = this.products.findIndex(t => t.id === product.id);
-    if (i > -1) {
-      this.products.splice(i, 1, product);
+    localStorage.setItem(product.id.toString(), JSON.stringify(product));
+    this.productsSubj.next(this.getStorageProducts());
+  }
+
+  private getStorageProducts(): IProduct[] {
+    const products: IProduct[] = [];
+
+    for (let i = 1; i < localStorage.length; i++) {
+      products.push(JSON.parse(localStorage.getItem(i.toString())));
     }
+
+    console.log(products);
+    return products;
   }
 }

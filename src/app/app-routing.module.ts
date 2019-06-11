@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, Route } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { ProductListComponent, ProductComponent } from './products/components';
 import { AboutComponent } from './layout/about/about.component';
 import { ProductCommentsComponent } from './products/components/product-comments/product-comments.component';
-import { CartItemComponent, CartListComponent } from './cart/components';
-import { OrdersListComponent } from './orders/components/orders-list/orders-list.component';
+import { CartListComponent } from './cart/components';
 import { AuthGuard } from './core/guards/auth.guard';
 import { LoginComponent } from './login/login/login.component';
+import { ProductResolveGuard } from './core/guards/product.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +15,10 @@ const routes: Routes = [
   },
   {
     path: 'products-list/info/:id',
-    component: ProductComponent
+    component: ProductComponent,
+    resolve: {
+      product: ProductResolveGuard
+    }
   },
   {
     path: 'about',

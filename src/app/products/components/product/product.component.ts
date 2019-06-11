@@ -4,6 +4,7 @@ import { IProduct } from '../../interfaces/iproduct';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
+import { pluck } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,6 @@ import { ProductService } from '../../services/product.service';
 export class ProductComponent implements OnInit {
 
   product: IProduct;
-
   readonly = false;
 
   constructor(
@@ -22,16 +22,13 @@ export class ProductComponent implements OnInit {
     private location: Location) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.params.id;
     if (this.route.snapshot.url.find(x => x.path === 'info')) {
       this.readonly = true;
     }
 
-    if (!id) {
-      this.product = new Product();
-    } else {
-      this.product = { ...this.productService.getProduct(+id) };
-    }
+    this.route.data.pipe(pluck('product')).subscribe((product: IProduct) => {
+      this.product = { ...product };
+    });
   }
 
   onAddIngredient(newIngredient: string): void {
