@@ -10,7 +10,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class ProductService {
 
   private counter = 1;
-  
+
   private productsSubj: BehaviorSubject<IProduct[]> = new BehaviorSubject<IProduct[]>(this.getStorageProducts());
 
   constructor() {

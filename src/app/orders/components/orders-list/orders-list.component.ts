@@ -19,19 +19,39 @@ export class OrdersListComponent implements OnInit, OnDestroy {
   constructor(private orderService: OrdersService) { }
 
   ngOnInit() {
-    this.sub = this.orderService.getOrders().subscribe( x => {
-        this.orders = x;
-
-        this.totalCount = 0;
-        this.totalPrice  = 0;
-        for (const order of this.orders) {
-          for (const orderItem of order.orderItems) {
-            this.totalPrice += orderItem.count * orderItem.price;
-            this.totalCount += orderItem.count;
-          }
-        }
-      });
+    this.loadOrders();
   }
+
+  deleteOrder(id: number) {
+
+    // such logic just for demo
+    this.orderService
+      .getOrder(id)
+      .then(order => this.orderService
+        .deleteOrder(order.id)
+        .then(() => this.loadOrders())
+        .catch(x => console.log(x)))
+      .catch(x => console.log(x));
+  }
+
+  private loadOrders() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
+
+    this.sub = this.orderService.getOrders().subscribe(x => {
+      this.orders = x;
+      this.totalCount = 0;
+      this.totalPrice = 0;
+      for (const order of this.orders) {
+        for (const orderItem of order.orderItems) {
+          this.totalPrice += orderItem.count * orderItem.price;
+          this.totalCount += orderItem.count;
+        }
+      }
+    });
+  }
+
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();

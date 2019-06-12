@@ -42,8 +42,11 @@ export class CartListComponent implements OnInit, OnDestroy, DoCheck {
 
   buy() {
 
+    this.orderService.getOrders();
+
     const order: IOrder = {
-      orderItems: []
+      orderItems: [],
+      id: undefined
     };
 
     for (const cartItem of this.cartItems) {
@@ -56,10 +59,12 @@ export class CartListComponent implements OnInit, OnDestroy, DoCheck {
       order.orderItems.push(orderItem);
     }
 
-    this.orderService.makeOrder(order);
-    this.cartService.clearCart();
-
-    this.router.navigate(['orders']);
+    this.orderService.makeOrder(order)
+      .subscribe(o => {
+        this.cartService.clearCart();
+        this.router.navigate(['orders']);
+      },
+        error => console.log(error));
   }
 
   ngDoCheck(): void {
