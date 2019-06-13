@@ -1,45 +1,48 @@
 import { Injectable } from '@angular/core';
 import { IOrder } from '../interfaces/ioder';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, throwError, pipe, from } from 'rxjs';
 import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse
 } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
+import { AppSettingsService } from 'src/app/core/services/app-settings.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
 
-  private ordersUrl = 'http://localhost:3000/orders';
-
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private appSettingsService: AppSettingsService
+  ) { }
 
   getOrders(): Observable<IOrder[]> {
-    return this.http
-      .get<IOrder[]>(this.ordersUrl)
-      .pipe(catchError(this.handleErrorObservable));
+    return this.getOrdersApi()
+      .pipe(
+        switchMap(url => this.http.get<IOrder[]>(url))
+      );
   }
 
   getOrder(id: number): Promise<IOrder> {
-    const url = `${this.ordersUrl}/${id}`;
-
-    return this.http
-      .get<IOrder>(url)
+    return this.getOrdersApi()
       .toPromise()
-      .then(order => order as IOrder)
-      .catch(this.handleErrorPromise);
+      .then(url => this.http
+        .get<IOrder>(`${url}/${id}`)
+        .toPromise()
+        .then(order => order as IOrder)
+        .catch(this.handleErrorPromise));
   }
 
   deleteOrder(id: number): Promise<IOrder> {
-    const url = `${this.ordersUrl}/${id}`;
-
-    return this.http
-      .delete<IOrder>(url)
+    return this.getOrdersApi()
       .toPromise()
-      .catch(this.handleErrorPromise);
+      .then(url => this.http
+        .delete<IOrder>(`${url}/${id}`)
+        .toPromise()
+        .catch(this.handleErrorPromise));
   }
 
   makeOrder(order: IOrder): Observable<IOrder> {
@@ -47,9 +50,16 @@ export class OrdersService {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    return this.http
-      .post<IOrder>(this.ordersUrl, JSON.stringify(order), options)
-      .pipe(catchError(this.handleErrorObservable));
+    return this.getOrdersApi()
+      .pipe(
+        switchMap(url => this.http
+          .post<IOrder>(url, JSON.stringify(order), options)
+          .pipe(catchError(this.handleErrorObservable)))
+      );
+  }
+
+  private getOrdersApi(): Observable<string> {
+    return this.appSettingsService.getOrdersApi();
   }
 
   private handleErrorPromise(error: any): Promise<any> {

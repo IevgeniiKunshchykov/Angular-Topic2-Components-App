@@ -41,9 +41,6 @@ export class CartListComponent implements OnInit, OnDestroy, DoCheck {
   }
 
   buy() {
-
-    this.orderService.getOrders();
-
     const order: IOrder = {
       orderItems: [],
       id: undefined

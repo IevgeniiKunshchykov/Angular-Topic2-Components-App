@@ -43,3 +43,8 @@
 8. You can watch list of orders in admin module. Orders are created from the cart.
 9. If user is logged in then 'Edit' button also appears on products-list page near each product
 10. Implemented product resolve guard and it is used to resolve product when you navigate to ProductComponent either to watch detailed info or edit or create product.
+
+## Actions - HttpClient
+1. Changed OrdersService to work with help of json-server. Some methods retirn Promise and some Observable
+2. Implemented TimingInterceptor that logs to console duration of only GET requests.
+3. IMplemented AppSettings service. It is used by OrdersService and also uses LocalStorageService to store OrdersURL

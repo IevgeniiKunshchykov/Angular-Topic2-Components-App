@@ -21,6 +21,15 @@ export class LocalStorageService {
     this.itemSubj.next(window.localStorage.getItem('item'));
   }
 
+  getItemByKey(key: string): string {
+    return localStorage.getItem(key);
+  }
+
+  setItemByKey(key: string, item: string) {
+    window.localStorage.setItem(key, item);
+    this.itemSubj.next(window.localStorage.getItem(key));
+  }
+
   removeItem(item: string) {
     window.localStorage.removeItem('item');
     this.itemSubj.next(null);
