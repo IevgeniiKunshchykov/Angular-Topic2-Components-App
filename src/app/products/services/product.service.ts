@@ -72,7 +72,6 @@ export class ProductService {
       products.push(JSON.parse(localStorage.getItem(i.toString())));
     }
 
-    console.log(products);
     return products;
   }
 }

@@ -5,6 +5,10 @@ import { ProductsAdminComponent } from './components/products-admin/products-adm
 import { AdminRoutingModule } from './admin-routing.module';
 import { ProductsModule } from '../products/products.module';
 import { OrdersModule } from '../orders/orders.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductsEffects } from '../core/+store/products/products.effects';
+import { productsReducer } from '../core/+store';
 
 @NgModule({
   declarations: [AdminComponent, ProductsAdminComponent],
@@ -12,7 +16,9 @@ import { OrdersModule } from '../orders/orders.module';
     CommonModule,
     ProductsModule,
     OrdersModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    StoreModule.forFeature('products', productsReducer),
+    EffectsModule.forFeature([ProductsEffects])
   ]
 })
 export class AdminModule { }

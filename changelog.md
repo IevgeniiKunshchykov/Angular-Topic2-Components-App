@@ -48,3 +48,9 @@
 1. Changed OrdersService to work with help of json-server. Some methods retirn Promise and some Observable
 2. Implemented TimingInterceptor that logs to console duration of only GET requests.
 3. IMplemented AppSettings service. It is used by OrdersService and also uses LocalStorageService to store OrdersURL
+
+## Actions - NgRx
+1. Create app state that contains products state.
+2. Created actions, reducer, selectors for products state
+3. Created same things for router
+4. Use it in product-list.component, products-admin.component, product.guard

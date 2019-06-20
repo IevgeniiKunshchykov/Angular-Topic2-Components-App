@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/products/services/product.service';
 import { Observable } from 'rxjs';
 import { IProduct } from 'src/app/products/interfaces/iproduct';
-import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
+import { NavigationExtras, ActivatedRoute } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { AppState, GetProducts } from 'src/app/core/+store';
+import { getProducts } from 'src/app/core/+store/products/products.selectors';
+import * as RouterActions from 'src/app/core/+store/router/router.actions';
 
 @Component({
   selector: 'app-products-admin',
@@ -18,19 +21,25 @@ export class ProductsAdminComponent implements OnInit {
   };
 
   constructor(
-    private productService: ProductService,
-    private router: Router,
+    private store: Store<AppState>,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.products$ = this.productService.getProducts();
+    this.products$ = this.store.pipe(select(getProducts));
+    this.store.dispatch(new GetProducts());
   }
 
   edit(product: IProduct) {
-    this.router.navigate(['edit/', product.id], this.navigationExtras);
+    this.store.dispatch(new RouterActions.Go({
+      path: ['edit/', product.id],
+      extras: this.navigationExtras
+    }));
   }
 
   addProduct() {
-    this.router.navigate(['add'], this.navigationExtras);
+    this.store.dispatch(new RouterActions.Go({
+      path: ['add'],
+      extras: this.navigationExtras
+    }));
   }
 }

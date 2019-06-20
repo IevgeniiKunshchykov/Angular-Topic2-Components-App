@@ -1,9 +1,11 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { IProduct } from '../../interfaces/iproduct';
 import { CartService } from 'src/app/cart/services/cart.service';
-import { ProductService } from '../../services/product.service';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { AppState, GetProducts } from 'src/app/core/+store';
+import { getProducts } from 'src/app/core/+store/products/products.selectors';
 
 @Component({
   selector: 'app-product-list',
@@ -18,13 +20,14 @@ export class ProductListComponent implements OnInit {
   products$: Observable<Array<IProduct>>;
 
   constructor(
-    private productService: ProductService,
+    private store: Store<AppState>,
     private cartService: CartService,
     private router: Router) {
   }
 
   ngOnInit(): void {
-    this.products$ = this.productService.getProducts();
+    this.products$ = this.store.pipe(select(getProducts));
+    this.store.dispatch(new GetProducts());
   }
 
   addToCart(product: IProduct): void {

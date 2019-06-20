@@ -2,6 +2,7 @@ import { NgModule, InjectionToken } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GeneratorService } from './services/generator.service';
 import { GeneratorServiceFactory, GeneratedSequence } from './services/generator.factory';
+import { CoreStoreModule } from './+store/core-store.module';
 
 export const Constants = new InjectionToken<string>('constants');
 
@@ -25,7 +26,8 @@ export const Constants = new InjectionToken<string>('constants');
     }
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    CoreStoreModule
   ]
 })
 export class CoreModule { }
