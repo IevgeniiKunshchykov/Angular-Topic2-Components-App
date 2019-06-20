@@ -9,7 +9,7 @@ export enum ProductsActionTypes {
     GET_PRODUCT = '[Products] GET_PRODUCT',
     GET_PRODUCT_SUCCESS = '[Products] GET_PRODUCT_SUCCESS',
     GET_PRODUCT_ERROR = '[Products] GET_PRODUCT_ERROR',
-    SET_PRODUCT = '[Products] SET_PRODUCT'    
+    SET_PRODUCT = '[Products] SET_PRODUCT'
 }
 
 export class GetProducts implements Action {
@@ -42,8 +42,8 @@ export class GetProductError implements Action {
 
 export class SetProduct implements Action {
     readonly type = ProductsActionTypes.SET_PRODUCT;
-    constructor(public payload: IProduct) {}
-  }
+    constructor(public payload: IProduct) { }
+}
 
 export type ProductsActions
     = GetProducts

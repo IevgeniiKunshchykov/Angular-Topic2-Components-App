@@ -1,13 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+
+  private sub: Subscription;
 
   constructor(
     public authService: AuthService,
@@ -17,9 +20,8 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(user: string) {
-    this.authService
+    this.sub = this.authService
       .login(user)
-      // А как быть с отпиской?
       .subscribe(
         () => {
           if (this.authService.isLoggedIn) {
@@ -31,5 +33,16 @@ export class LoginComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+    this.removeSubscriptions();
+  }
+
+  ngOnDestroy(): void {
+    this.removeSubscriptions();
+  }
+
+  private removeSubscriptions() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }

@@ -40,9 +40,8 @@ export class ProductService {
     product3.ingredients = ['Milk'];
     product3.comments = ['Best ever', 'Very fresh'];
 
-    localStorage.setItem(product1.id.toString(), JSON.stringify(product1));
-    localStorage.setItem(product2.id.toString(), JSON.stringify(product2));
-    localStorage.setItem(product3.id.toString(), JSON.stringify(product3));
+    const products: IProduct[] = [product1, product2, product3];
+    this.setProductsToStorage(products);
   }
 
   getProducts(): Observable<Array<IProduct>> {
@@ -50,34 +49,31 @@ export class ProductService {
   }
 
   getProduct(id: number): IProduct {
-    return JSON.parse(localStorage.getItem(id.toString()));
+    return this.getStorageProducts().find(x => x.id == id);
   }
 
   createProduct(product: IProduct): void {
     product.id = this.counter++;
-    localStorage.setItem(product.id.toString(), JSON.stringify(product));
-    this.productsSubj.next(this.getStorageProducts());
+    const products = this.getStorageProducts();
+    products.push(product);
+    this.setProductsToStorage(products);
+    this.productsSubj.next(products);
   }
 
   updateProduct(product: IProduct) {
-    localStorage.setItem(product.id.toString(), JSON.stringify(product));
-    this.productsSubj.next(this.getStorageProducts());
+    const products = this.getStorageProducts();
+    var index = products.findIndex(x => x.id == product.id);
+    products[index] = product;
+    this.setProductsToStorage(products);
+    this.productsSubj.next(products);
   }
 
   private getStorageProducts(): IProduct[] {
-    const products: IProduct[] = [];
-
-    // Так делать нельзя, так как в сторедже могут быть и другие данные,
-    // поэтому лучше все данные сохранить в виде сериалиированного объекта с каким-то ключем,
-    // а затем достать по этому ключу из стореджа
-
-    // У меня, например, браузер добавляет еще такие ключи, как urlBlackList, showIcon
-    // Поэтому когда происходит чтение, то в массив попадает что-то не то и не отображается первая страница
-    // Если их убрать, то все отображается
-    for (let i = 1; i < localStorage.length; i++) {
-      products.push(JSON.parse(localStorage.getItem(i.toString())));
-    }
-
+    const products: IProduct[] = JSON.parse(localStorage.getItem('products'));
     return products;
+  }
+
+  private setProductsToStorage(products: IProduct[]) {
+    localStorage.setItem('products', JSON.stringify(products));
   }
 }
