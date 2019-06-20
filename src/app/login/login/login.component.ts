@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   onLogin(user: string) {
     this.authService
       .login(user)
+      // А как быть с отпиской?
       .subscribe(
         () => {
           if (this.authService.isLoggedIn) {

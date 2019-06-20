@@ -8,7 +8,6 @@ import { Observable, BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-
   private counter = 1;
 
   private productsSubj: BehaviorSubject<IProduct[]> = new BehaviorSubject<IProduct[]>(this.getStorageProducts());
@@ -68,6 +67,13 @@ export class ProductService {
   private getStorageProducts(): IProduct[] {
     const products: IProduct[] = [];
 
+    // Так делать нельзя, так как в сторедже могут быть и другие данные,
+    // поэтому лучше все данные сохранить в виде сериалиированного объекта с каким-то ключем,
+    // а затем достать по этому ключу из стореджа
+
+    // У меня, например, браузер добавляет еще такие ключи, как urlBlackList, showIcon
+    // Поэтому когда происходит чтение, то в массив попадает что-то не то и не отображается первая страница
+    // Если их убрать, то все отображается
     for (let i = 1; i < localStorage.length; i++) {
       products.push(JSON.parse(localStorage.getItem(i.toString())));
     }

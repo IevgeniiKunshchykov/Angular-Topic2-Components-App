@@ -8,6 +8,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { LoginComponent } from './login/login/login.component';
 import { ProductResolveGuard } from './core/guards/product.guard';
 
+// Позже можно разнести роутинг в отдельные модули ProductRoutingModule, CartRoutingModule
 const routes: Routes = [
   {
     path: 'products-list',
