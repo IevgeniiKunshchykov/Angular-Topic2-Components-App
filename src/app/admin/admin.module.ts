@@ -17,8 +17,11 @@ import { productsReducer } from '../core/+store';
     ProductsModule,
     OrdersModule,
     AdminRoutingModule,
-    StoreModule.forFeature('products', productsReducer),
-    EffectsModule.forFeature([ProductsEffects])
+    // Этот редюсер и эффекты уже зарегистрированы в модуле
+    // src\app\products\products.module.ts.
+    // Нет необходимости их еще раз регистрировать
+    // StoreModule.forFeature('products', productsReducer),
+    // EffectsModule.forFeature([ProductsEffects])
   ]
 })
 export class AdminModule { }

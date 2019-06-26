@@ -5,6 +5,7 @@ import { Product } from 'src/app/products/models/product';
 
 export const getProductsState = createFeatureSelector<ProductsState>('products');
 
+// Эти два селектора можно получить из адаптера
 export const getProductsEntities = createSelector(getProductsState, (state: ProductsState) => state.entities);
 export const getProducts = createSelector(getProductsEntities, entities => {
   return Object.keys(entities).map(id => entities[+id]);
