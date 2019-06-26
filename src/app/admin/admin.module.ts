@@ -5,10 +5,6 @@ import { ProductsAdminComponent } from './components/products-admin/products-adm
 import { AdminRoutingModule } from './admin-routing.module';
 import { ProductsModule } from '../products/products.module';
 import { OrdersModule } from '../orders/orders.module';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { ProductsEffects } from '../core/+store/products/products.effects';
-import { productsReducer } from '../core/+store';
 
 @NgModule({
   declarations: [AdminComponent, ProductsAdminComponent],
@@ -16,12 +12,7 @@ import { productsReducer } from '../core/+store';
     CommonModule,
     ProductsModule,
     OrdersModule,
-    AdminRoutingModule,
-    // Этот редюсер и эффекты уже зарегистрированы в модуле
-    // src\app\products\products.module.ts.
-    // Нет необходимости их еще раз регистрировать
-    // StoreModule.forFeature('products', productsReducer),
-    // EffectsModule.forFeature([ProductsEffects])
+    AdminRoutingModule
   ]
 })
 export class AdminModule { }
