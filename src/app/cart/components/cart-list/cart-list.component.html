@@ -9,7 +9,60 @@
     </ul>
     <div>Total count:{{totalCount}}</div>
     <div>Total price:{{totalPrice}}</div>
-    <button align="right" (click)="buy();">Buy</button>
+
+    <div style="margin: 10px; border: 4px solid coral;">
+      <form class="form-horizontal" (ngSubmit)="buy()" [formGroup]="userForm">
+        <fieldset>
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="name">Name</label>
+            <div class="col-md-5">
+              <input class="form-control" id="name" type="text" placeholder="Name (required)" formControlName="name" (blur)="setNameValidationMessage()" />
+              <span class="help-block" *ngIf="nameValidationMessage">
+                {{ nameValidationMessage }}
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-2 control-label" for="email">Email</label>
+            <div class="col-md-5">
+              <input class="form-control" id="email" type="text" placeholder="email (required)"
+                formControlName="email" />
+              <span class="help-block"
+                *ngIf="(userForm.get('email').touched || userForm.get('email').dirty) && userForm.get('email').errors">
+                <span *ngIf="userForm.get('email').hasError('required')">
+                  Please enter email.
+                </span>
+              </span>
+            </div>
+          </div>
+
+          <div formArrayName="contacts">
+            <div *ngFor="let phone of userForm.get('contacts').controls; let i = index">
+              <div class="form-group">
+                <label class="col-md-2 control-label" attr.for="{{phone + i}}">Phone</label>
+                <div class="col-md-5">
+                  <input class="form-control" id="{{phone + i}}" type="text" placeholder="phone (required)"
+                    [formControlName]="i" />
+                    <button type="button" (click)="removePhone(phone)" *ngIf="userForm.get('contacts').length > 1">Remove</button>
+                  <span class="help-block" *ngIf="(phone.touched || phone.dirty) && phone.errors">
+                    <span *ngIf="phone.hasError('required')">
+                      Please enter phone.
+                    </span>
+                    <span *ngIf="phone.hasError('wrongPhoneCountryCode')">
+                      Phone country code should start with +38
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <button (click)="addPhoneGroup()" type="button">Add Phone</button>
+          </div>
+        </fieldset>
+        <button align="right" type="submit" [disabled]="!userForm.valid">Buy</button>
+      </form>
+    </div>
   </div>
   <ng-template #cartEmpty>
     <div>

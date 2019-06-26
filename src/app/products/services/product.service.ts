@@ -49,7 +49,7 @@ export class ProductService {
   }
 
   getProduct(id: number): IProduct {
-    return this.getStorageProducts().find(x => x.id == id);
+    return this.getStorageProducts().find(x => x.id === id);
   }
 
   createProduct(product: IProduct): void {
@@ -62,7 +62,7 @@ export class ProductService {
 
   updateProduct(product: IProduct) {
     const products = this.getStorageProducts();
-    var index = products.findIndex(x => x.id == product.id);
+    const index = products.findIndex(x => x.id === product.id);
     products[index] = product;
     this.setProductsToStorage(products);
     this.productsSubj.next(products);

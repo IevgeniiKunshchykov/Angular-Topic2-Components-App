@@ -54,3 +54,10 @@
 2. Created actions, reducer, selectors for products state
 3. Created same things for router
 4. Use it in product-list.component, products-admin.component, product.guard
+
+## Actions - Forms
+1. Added new fields with user info to cart list component template. Used reactive forms
+2. Added validation for new fields.
+3. Added custom validator phoneCountryCode to validate country code of the phone.
+4. Added ability to have multiple phones. Used FormArray for that.
+5. Validate name in code and bind validation message to template. 
