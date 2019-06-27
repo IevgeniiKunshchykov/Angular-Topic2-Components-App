@@ -1,4 +1,5 @@
 import { IProduct } from '../interfaces/iproduct';
+import { Country } from './country';
 
 export class Product implements IProduct {
     public id: number;

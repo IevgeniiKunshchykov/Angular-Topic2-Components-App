@@ -1,3 +1,5 @@
+import { Country } from '../models/country';
+
 export interface IProduct {
     id: number;
     name: string;

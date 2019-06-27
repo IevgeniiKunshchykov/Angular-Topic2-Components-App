@@ -61,3 +61,8 @@
 3. Added custom validator phoneCountryCode to validate country code of the phone.
 4. Added ability to have multiple phones. Used FormArray for that.
 5. Validate name in code and bind validation message to template. 
+
+## Actions - Tests
+1. Created couple of tests for order-by.pipe.ts
+2. Created couple of tests for product.service.ts
+3. Create code coverage report in /coverage/shop/index.html
