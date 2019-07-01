@@ -1,4 +1,4 @@
-<h1 align="center" #appTitle>qwe</h1>
+<h1 align="center" #appTitle></h1>
 
 <div>
     <nav class="navbar navbar-default">
@@ -9,7 +9,7 @@
                 </li>
                 <li routerLinkActive="active">
                     <a routerLink="/cart">Cart</a>
-                </li>                
+                </li>
                 <li routerLinkActive="active">
                     <a routerLink="/about">About</a>
                 </li>
@@ -24,7 +24,7 @@
     </nav>
 </div>
 
-<div>
+<div class="holder">
     <div class="col-md-9">
         <router-outlet></router-outlet>
     </div>
@@ -32,15 +32,3 @@
         <router-outlet name='comments'></router-outlet>
     </div>
 </div>
-
-<!-- <div style="text-align:center; display: inline;">
-    <div style="float: left">
-        <app-product-list></app-product-list>
-    </div>
-    <div style="float: left">
-        <app-cart-list align="top"></app-cart-list>
-    </div>
-    <div style="float: left">
-        <app-orders-list align="top"></app-orders-list>
-    </div>
-</div> -->

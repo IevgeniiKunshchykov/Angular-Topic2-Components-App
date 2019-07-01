@@ -1,35 +1,38 @@
-// import { TestBed, async } from '@angular/core/testing';
-// import { RouterTestingModule } from '@angular/router/testing';
-// import { AppComponent } from './app.component';
+import { TestBed, async } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
+import { By } from '@angular/platform-browser';
 
-// describe('AppComponent', () => {
-//   beforeEach(async(() => {
-//     TestBed.configureTestingModule({
-//       imports: [
-//         RouterTestingModule
-//       ],
-//       declarations: [
-//         AppComponent
-//       ],
-//     }).compileComponents();
-//   }));
+describe('AppComponent', () => {
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                RouterTestingModule
+            ],
+            declarations: [
+                AppComponent
+            ],
+        }).compileComponents();
+    }));
 
-//   it('should create the app', () => {
-//     const fixture = TestBed.createComponent(AppComponent);
-//     const app = fixture.debugElement.componentInstance;
-//     expect(app).toBeTruthy();
-//   });
 
-//   it(`should have as title 'shop'`, () => {
-//     const fixture = TestBed.createComponent(AppComponent);
-//     const app = fixture.debugElement.componentInstance;
-//     expect(app.title).toEqual('shop');
-//   });
+    it(`should have as title 'shop'`, () => {
+        const fixture = TestBed.createComponent(AppComponent);
+        const app = fixture.debugElement.componentInstance;
+        fixture.detectChanges();
+        expect(app.apptitle.nativeElement.innerText).toEqual('Shop');
+    });
 
-//   it('should render title in a h1 tag', () => {
-//     const fixture = TestBed.createComponent(AppComponent);
-//     fixture.detectChanges();
-//     const compiled = fixture.debugElement.nativeElement;
-//     expect(compiled.querySelector('h1').textContent).toContain('Welcome to shop!');
-//   });
-// });
+    it(`should have 5 navigate menu ites`, () => {
+        const fixture = TestBed.createComponent(AppComponent);
+
+        const menuItems = fixture.debugElement.query(By.css('.navbar-nav')).children;
+        expect(menuItems.length).toEqual(5);
+
+        expect(((menuItems[0].nativeElement as HTMLElement).querySelector('a') as HTMLElement).innerText).toEqual('Products');
+        expect(((menuItems[1].nativeElement as HTMLElement).querySelector('a') as HTMLElement).innerText).toEqual('Cart');
+        expect(((menuItems[2].nativeElement as HTMLElement).querySelector('a') as HTMLElement).innerText).toEqual('About');
+        expect(((menuItems[3].nativeElement as HTMLElement).querySelector('a') as HTMLElement).innerText).toEqual('Admin');
+        expect(((menuItems[4].nativeElement as HTMLElement).querySelector('a') as HTMLElement).innerText).toEqual('Login');
+    });
+});

@@ -1,7 +1,7 @@
 <div style="margin: 5px; padding: 30px; border: 4px solid blueviolet;">
   <h4>Cart:</h4>
   <div *ngIf="cartItems.length > 0; else cartEmpty">
-    <ul>
+    <ul class="cart-items">
       <li *ngFor="let cartItem of cartItems">
         <app-cart-item [cartItem]="cartItem" (removeCartItem)="removeCartItem($event);"
           (increaseCount)="increaseCount($event)" (decreaseCount)="decreaseCount($event)"></app-cart-item>
@@ -65,7 +65,7 @@
     </div>
   </div>
   <ng-template #cartEmpty>
-    <div>
+    <div class="empty-cart">
       Cart is empty.
     </div>
   </ng-template>

@@ -65,4 +65,6 @@
 ## Actions - Tests
 1. Created couple of tests for order-by.pipe.ts
 2. Created couple of tests for product.service.ts
-3. Create code coverage report in /coverage/shop/index.html
+3. Created couple of tests for CartListComponent
+4. Created couple of tests for AppComponent
+5. Create code coverage report in /coverage/shop/index.html
