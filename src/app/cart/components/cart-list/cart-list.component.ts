@@ -64,6 +64,8 @@ export class CartListComponent implements OnInit, OnDestroy, DoCheck {
     });
   }
 
+  // Название метода идет в разрез тому, что он делает.
+  // Ведь он не группу строит, а контрол.
   private buildPhoneGroup(): FormControl {
     return this.fb.control('', { validators: [Validators.required, CustomValidators.phoneCountryCode('+38')], updateOn: 'blur' });
   }
